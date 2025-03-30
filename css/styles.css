@@ -1,0 +1,274 @@
+
+:root{
+    --menu-transition-delay: 5s;
+    --skills-transition: 100%;
+}
+body{
+    background-color: white;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* transition: width 3s ease var(--menu-transition-delay);  */
+}
+
+.list{
+    display: flex;
+    list-style: none;
+    height: 95%;
+    justify-content: flex-start;
+    width: 100%;
+    position: absolute;
+}
+
+.card{
+    display: flex;
+    height: 100%;
+    width: 30%;
+    border-radius: 15px;
+    align-items: flex-end;  
+    justify-content: flex-start;
+    margin: 15px;
+}
+
+.card a{
+    transform: rotate(-90deg) scale(1.0);
+    font-size: 200px;
+    margin: 40px;
+    width: 100%;
+    white-space: nowrap;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transition: transform 1s ease;
+}
+
+.card.minimize{
+  animation: minimize-card 2s ease 1s forwards; 
+  animation-play-state: running;
+}
+.card.maximize{
+    animation: minimize-card 2s ease reverse forwards; 
+    animation-play-state: running;
+  }
+
+.card.hidden{
+    animation: minimize-tabs 1s linear forwards; 
+}
+
+.card.inactive{
+    animation: hide-card 1s linear forwards
+}
+
+.card.active{
+    /* position: absolute; */
+    animation :move-left 3s linear forwards;
+}
+
+.card.show{
+    animation: minimize-tabs 1s linear reverse forwards; 
+}
+
+.card a.minimizeText{
+    animation: text-off 1s linear forwards; 
+    animation-play-state: running;
+}
+
+.card a.maximizeText{
+    animation: text-off 1s linear reverse forwards; 
+    animation-play-state: running;
+}
+.content.show{
+    animation: show-content 1.5s linear forwards;
+    animation-delay: 5s;
+}
+.content.hide{
+    animation: show-content 1.5s linear reverse forwards;
+    animation-delay: 0s;
+}
+.menu.hide{
+    animation: small-panel 1s linear forwards; 
+    animation-delay: 5s;
+    /* width:25%;
+    max-width: 400px;
+    min-width: 300px; */
+}
+
+.menu.show{
+    animation: big-panel 1s linear forwards; 
+    animation-delay: 0s;
+}
+.list .about-me-color{
+    background-color: red;
+}
+
+.menu .card:not(.hoverCard):hover a{
+    position: relative;
+    animation: move-text 2s ease-out;
+}
+
+.card.hoverCard{
+    border: 1px solid black;
+}
+.menu ul .skills-color{
+    background-color: green;
+}
+.menu ul .projects-color{
+    background-color: blue;
+}
+
+.pointer{
+    display: flex;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-color: whitesmoke;
+    border-style: solid;
+    border-width: 1px;
+    background-color: darkgreen;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    margin: 0px 0px 0px 25px;
+}
+
+.container{
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    color: white; 
+}
+
+.logo{
+    width: 20%;
+}
+
+.data{
+    overflow: hidden;
+    display: flex;
+    opacity: 0;
+}
+
+.content{
+    width: 0%;
+    background-color: red;
+    height: 90%;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-left: 150px;
+    display: flex;
+    position: absolute;
+}
+
+@keyframes move-text {
+    0% {
+        bottom: 0%;
+    }
+    50%{
+        bottom: 50%;
+    }
+    100%{
+        bottom: 0%;
+    }
+}
+
+@keyframes hide-card{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+        width: 0%;
+        margin: 0px;
+        visibility: hidden;
+    }
+}
+
+@keyframes minimize-card
+{
+    100%{
+        width: 10%;
+        height: 100%;
+        min-width: 100px;
+    }
+}
+
+@keyframes hide-panel
+{
+    100%{
+        width: 0%;
+        height: 0px;
+    }
+}
+
+@keyframes minimize-tabs
+{
+    100%{
+        height: 0%;
+        overflow: hidden;
+        opacity: 0;
+        z-index: -1; 
+    }
+}
+
+@keyframes move-left
+{
+    100%{
+        left: 0%
+    }
+}
+@keyframes text-off{
+    0% {
+        transform: translate(0, 0) scale(1) rotate(-90deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
+    }
+}
+
+@keyframes show-content{
+    0%{
+        height: 90%;
+        width: 0%;
+        background-color: red;
+    }
+    100%{
+        width: 80%;
+        height: 90%;    
+    }
+}
+
+@keyframes small-panel{
+    0%{
+        width:100%;
+    }
+    100%
+    {
+        width:25%;
+        max-width: 400px;
+        min-width: 300px;
+    }
+}
+
+@keyframes big-panel{
+    0%{
+        width:25%;
+        max-width: 400px;
+        min-width: 300px;
+    }
+
+    100%{
+        width:100%;
+    }
+}

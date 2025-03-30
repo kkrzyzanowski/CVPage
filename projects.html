@@ -1,0 +1,48 @@
+<div class="projects">
+    <h2>Projects</h2>
+    <div class="project-container">
+        <div class="project-tab">
+            <img src="Gifs/1.gif" data-video="videos/1.mp4">
+            <p class="title">OpenGL App prototype</p>
+            <p class="description">This is a project which give me most fun. It's an OpenGL project combined
+                with C++ to demonstrate of openGL, of course it's look horrible but implementing things like selecting
+                or creating various elements from pure code using some shaders like normal and specular mapping gave me
+                fun and some skills.
+                There are some plans to make from this an simple engine but I have to implement GUI with imgui. Later
+                maybe extend it with DirectX
+                library.
+            </p>
+        </div>
+        <div class="project-tab">
+            <img src="Gifs/2.gif" data-video="videos/2.mp4">
+            <p class="title">Unity 3D Dot push</p>
+            <p class="description">Try to make a simple game in Unity with version 5, to tap dots and get points, I
+                ended only with implemented some
+                of mechanism like false dots, better look
+            </p>
+        </div>
+        <div class="project-tab">
+            <img src="Gifs/4.gif" data-video="videos/3.mp4">
+            <p class="title">Some Unity Shader</p>
+            <p class="description">Simple shader made in unity code to make some kind of arrow</p>
+        </div>
+        <div class="project-tab">
+            <img src="Gifs/5.gif" data-video="videos/4.mp4">
+            <p class="title">Unreal Engine view</p>
+            <p class="description">Simply created some view with Unreal Engine 5, plan to make open world of this</p>
+        </div>
+    </div>
+    <div class="projects-navigation">
+        <input type="radio" name="project-nav" id="pos1"/>
+        <input type="radio" name="project-nav" id="pos2" checked />
+        <input type="radio" name="project-nav" id="pos3"/>
+        <input type="radio" name="project-nav" id="pos4"/>
+    </div>
+</div>
+<div id="videoModal" class="modal">
+    <span class="close">&times;</span>
+    <video id="videoPlayer" controls>
+        <source id="videoSource" src="" type="">
+        Your browser can't use video tag.
+    </video>
+</div>
