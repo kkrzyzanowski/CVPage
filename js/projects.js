@@ -33,12 +33,16 @@ export function loadVideoProjectsBehaviour() {
         });
     });
 
-    loadButtonsForProjects();
+    loadEventsForProjects();
 };
 
-function loadButtonsForProjects(){
+function loadEventsForProjects(){
     document.querySelectorAll(".projects > button").forEach(button =>{
         button.addEventListener("click",() => ButtonProjectClick(button.dataset.direction))
+    });
+
+    document.querySelectorAll("input[name='project-nav']").forEach(button =>{
+        button.addEventListener("click",() => InputClick())
     });
 }
 
@@ -56,4 +60,11 @@ function ButtonProjectClick(direction){
     input.checked = false;
     var currInput = document.getElementById(`pos${currentInput}`);
     currInput.checked = true;
+}
+
+function InputClick(){
+    var id = document.querySelector('input[name="project-nav"]:checked').id;
+    var tabNubmer = id[id.length - 1];
+    console.log(tabNubmer);
+    currentInput = parseInt(tabNubmer);
 }
