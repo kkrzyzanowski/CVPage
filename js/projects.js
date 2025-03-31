@@ -1,3 +1,5 @@
+let currentInput = 2;
+let inputs = 4
 export function loadVideoProjectsBehaviour() {
     const modal = document.getElementById("videoModal");
     const videoPlayer = document.getElementById("videoPlayer");
@@ -30,4 +32,28 @@ export function loadVideoProjectsBehaviour() {
             }
         });
     });
+
+    loadButtonsForProjects();
 };
+
+function loadButtonsForProjects(){
+    document.querySelectorAll(".projects > button").forEach(button =>{
+        button.addEventListener("click",() => ButtonProjectClick(button.dataset.direction))
+    });
+}
+
+function ButtonProjectClick(direction){
+    console.log(`Button clicked with direction: ${direction}`);
+    let move = 1;
+    if(direction === "left")
+        move = -1;
+    currentInput += move;
+    if(currentInput < 1)
+        currentInput = 1;
+    else if(currentInput > inputs)
+        currentInput = inputs;
+    var input = document.querySelector('input[name="project-nav"]:checked');
+    input.checked = false;
+    var currInput = document.getElementById(`pos${currentInput}`);
+    currInput.checked = true;
+}
