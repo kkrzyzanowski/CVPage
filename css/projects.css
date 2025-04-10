@@ -1,6 +1,6 @@
 .projects{
     /* overflow: hidden; */
-    justify-content: center;
+    justify-content: flex-start;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -14,7 +14,8 @@
     width: 90%;
     height: 80%;
     transform-style: preserve-3d;
-    perspective: 600px;
+    perspective: 1000px;
+    height: 85%;
     --items: 2;
     --middle: 2;
     --position: 1;

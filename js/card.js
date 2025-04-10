@@ -32,6 +32,10 @@ export class Card {
             $(this.textElement).on('animationend', () => {
                 this.textElement.classList.remove("minimizeText");
                 this.textElement.style.transform = "translate(-50%, -50%) scale(0.2) rotate(-90deg)";
+
+                
+                let backButton = this.card.querySelector(".back-button");
+                backButton.classList.add("active");
                 this.resolveHiddenCard();
             });
         });
@@ -39,6 +43,8 @@ export class Card {
     }
 
     async StartHideCardAnimation() {
+
+
         this.card.classList.add("hoverCard");
         this.card.classList.remove("show");
         void this.card.offsetWidth;
@@ -50,6 +56,10 @@ export class Card {
     }
 
     async BackActiveCardToDefault() {
+
+        let backButton = this.card.querySelector(".back-button");
+        backButton.classList.remove("active");
+        
         this.card.classList.remove("minimize");
         void this.card.offsetWidth;
         this.card.classList.add("maximize");
@@ -76,6 +86,7 @@ export class Card {
         })
 
         await new Promise(resolve => {
+            
             this.card.classList.remove("active");
             this.currentCardPos = this.card.getBoundingClientRect();
             const deltaX = this.startCardPos.left - this.currentCardPos.left;

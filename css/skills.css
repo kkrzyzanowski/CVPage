@@ -1,9 +1,14 @@
 .skills{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
+    flex-direction: column;
 }
 
+.skills h2{
+    display: inline;
+    /* height: 10%; */
+}
 .skills-container{
     display: flex;
     align-items: center;
@@ -13,9 +18,12 @@
     margin: 10px;
     position: relative;
     overflow: hidden;
+    align-self: center;
+    height: 100%;
 }
 
 .skill-tab{
+    display: flex;
     position: absolute; 
     justify-content: center;
     width: 100%;
