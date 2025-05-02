@@ -29,15 +29,20 @@ export class Card {
             this.textElement.classList.add("minimizeText");
         }, 500);
         await new Promise(resolve => {
-            $(this.textElement).on('animationend', () => {
+            const handler = () => {
+            
+                $(this.textElement).off('animationend', handler);
                 this.textElement.classList.remove("minimizeText");
                 this.textElement.style.transform = "translate(-50%, -50%) scale(0.2) rotate(-90deg)";
 
                 
                 let backButton = this.card.querySelector(".back-button");
                 backButton.classList.add("active");
+    
                 this.resolveHiddenCard();
-            });
+                resolve();
+            };
+            $(this.textElement).on('animationend', handler);
         });
 
     }
@@ -59,7 +64,7 @@ export class Card {
 
         let backButton = this.card.querySelector(".back-button");
         backButton.classList.remove("active");
-        
+
         this.card.classList.remove("minimize");
         void this.card.offsetWidth;
         this.card.classList.add("maximize");
