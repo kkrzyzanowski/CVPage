@@ -4,13 +4,13 @@
     margin: 0 auto;
     padding: 20px;
     flex-direction: column;
-    
 }
 
 .about-me p{
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
 .about-me p:nth-child(even){
     width: 50%;
     align-self: flex-start;

@@ -32,7 +32,7 @@ new Chart(ctx, {
                     max: 100
                 }
             }
-        },
+        }
     }
 });
 }
@@ -74,29 +74,17 @@ export function drawPureSkillsChart(){
 
 export async function ButtonClick(direction){
     previousSkillPage = skillPage;
-    let dirMultiplier = (direction == "right") ? -1 : 1;
+    let dirMultiplier = (direction == "right") ? 1 : -1;
         if(direction === "right"){
             skillPage++;
             if(skillPage > maxSkillPages){
                 skillPage = 1;
-                // let card = document.getElementById(`skill-tab-${skillPage}`);
-                // card.style.transition = "none";
-                // card.style.transform = "translateX(-100%)";
-            }
-            else{
-                //dirMultiplier = -1;
-            }
+             }
         }
         else if(direction === "left"){
             skillPage--;
             if(skillPage < 1){
                 skillPage = maxSkillPages;
-                // let card = document.getElementById(`skill-tab-${skillPage}`);
-                // card.style.transition = "none";
-                // card.style.transform = "translateX(-100%)";
-            }
-            else{
-                
             }
         }
     await new Promise(resolve => setTimeout(resolve, 100));

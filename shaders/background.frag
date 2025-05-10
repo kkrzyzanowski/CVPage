@@ -1,41 +1,31 @@
-#ifdef GL_ES
 precision mediump float;
-#endif
 
 uniform vec2 u_resolution;
 uniform float u_time;
 
-float rand(vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
-// Glow krzywa (Gaussian-like)
-float glow(float d, float radius, float intensity) {
-    return intensity * exp(-pow(d, 2.0) / radius);
+float random(float val){
+    return fract(sin(val * 91.3458 + 47.853) * 43758.5453);
 }
 
 void main() {
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    uv.x *= u_resolution.x / u_resolution.y;
 
     vec3 color = vec3(0.0);
+    // Pozycja linii fali
+    for(float i = 0.07; i<=0.35; i+=0.07){
+        float y = i + 0.1 * sin(uv.x * random(i) * 10.0 + u_time * 0.5);
 
-    // ile linii światła
-    const int COUNT = 20;
-
-    for (int i = 0; i < COUNT; i++) {
-        float y = float(i) / float(COUNT); // poziom linii
-        float speed = 0.3 + rand(vec2(float(i))) * 1.5;
-        float offset = rand(vec2(i, 42.0)) * 10.0;
-
-        float x = mod(u_time * speed + offset, 1.5) - 0.25; // pozycja pozioma światła
-
-        float d = abs(uv.x - x);
-        float glowAmount = glow(d, 0.01, 0.9); // mały rozmiar + intensywność
-
-        // Dodajemy glow do konkretnej linii (y-pozycja)
-        float line = smoothstep(0.005, 0.0, abs(uv.y - y));
-        color += vec3(1.0, 0.6, 1.0) * glowAmount * line;
+    // Odległość od aktualnego piksela do fali
+    float dist = abs(uv.y - y);
+	
+    // Glow efekt wokół linii
+    float glow = exp(-dist * 100.);
+    float glowBackground = smoothstep(0.09, 0.0, dist);
+    // Kolor neonowy, np. fiolet
+    color += vec3(0.8, 0.2, 1.0) * (glow + glowBackground) ;
     }
+    
 
     gl_FragColor = vec4(color, 1.0);
 }

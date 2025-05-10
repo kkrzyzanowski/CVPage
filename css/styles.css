@@ -3,9 +3,6 @@
     --menu-transition-delay: 5s;
     --skills-transition: 100%;
 }
-body{
-    background-color: white;
-}
 
 canvas {
     display: block;
@@ -28,7 +25,7 @@ canvas {
     width: 100%;
     height: 100%;
     position: relative;
-    /* transition: width 3s ease var(--menu-transition-delay);  */
+   
 }
 
 .list{
@@ -51,11 +48,19 @@ canvas {
     position: relative;
     overflow: hidden;
     opacity: 0.7;
+    background-color: black;
+
+    font-family: "Tektur", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
 .card a{
     transform: rotate(-90deg) scale(1.0);
-    font-size: 200px;
+    font-size: 180px;
     margin: 40px;
     width: 100%;
     white-space: nowrap;
@@ -119,8 +124,21 @@ canvas {
     animation: big-panel 1s linear forwards; 
     animation-delay: 0s;
 }
-.list .about-me-color{
-    background-color: red;
+.card.about-me-color{
+    border-style: solid;
+    border-width: 3px;
+    border-color: blueviolet;
+}
+
+.card.skills-color{
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(110, 34, 182);
+}
+.card.projects-color{
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(89, 25, 148);
 }
 
 .menu .card:not(.hoverCard):hover a{
@@ -128,14 +146,23 @@ canvas {
     animation: move-text 2s ease-out;
 }
 
-.card.hoverCard{
-    border: 1px solid black;
+.card.about-me-color:hover{
+    box-shadow: 0 0 10px blueviolet, 0 0 20px blueviolet, 0 0 30px blueviolet;
+    border-style: solid;
+    border-width: 3px;
+    border-color: blueviolet;
 }
-.menu ul .skills-color{
-    background-color: green;
+.card.skills-color:hover{
+    box-shadow: 0 0 10px rgb(110, 34, 182), 0 0 20px rgb(110, 34, 182), 0 0 30px rgb(110, 34, 182);
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(110, 34, 182)
 }
-.menu ul .projects-color{
-    background-color: blue;
+.card.projects-color:hover{
+    box-shadow: 0 0 10px rgb(89, 25, 148), 0 0 20px rgb(89, 25, 148), 0 0 30px rgb(89, 25, 148);
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(89, 25, 148);
 }
 
 .container{
@@ -160,7 +187,10 @@ canvas {
 
 .content{
     width: 0%;
-    background-color: red;
+    background-color: black;
+    border-style: solid;
+    border-width: 0px;
+    border-color:blueviolet;
     height: 90%;
     margin-bottom: 25px;
     margin-top: 10px;
@@ -268,11 +298,13 @@ canvas {
     0%{
         height: 90%;
         width: 0%;
-        background-color: red;
+        border-width: 0px;
     }
+
     100%{
         width: 80%;
-        height: 90%;    
+        height: 90%; 
+        border-width: 3px;   
     }
 }
 
