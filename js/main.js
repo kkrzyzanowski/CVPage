@@ -34,7 +34,9 @@ export async function runAnimation($event){
                 resolve();
             });
         });
-        runContent($event);
+        
+        await runContent($event);
+        activeCard.ActiveBackButton();
     }
     else
     {
@@ -47,12 +49,15 @@ export async function runAnimation($event){
 }
 
 function runContent(index){
+    return new Promise(resolve => {
     content.classList.add("show");
     menu.classList.remove("show");
     menu.classList.add("hide");
     setTimeout(() => {
         contentLoader(index);
-    }, 5000);
+        Promise.resolve().then(resolve);
+    }, 5000); // to calculate
+});
         
 }
 

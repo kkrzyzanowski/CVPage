@@ -4,7 +4,25 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 20px;
+    margin: 0 auto;
 }
+
+.projects h2{
+    display: inline-flex;
+    width: 100%;
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    border-top: 0px;
+    border-left: 0px;
+    border-right:0px;
+    border-spacing: 2px;
+    border-bottom: 3px;
+    border-style: solid;
+    border-color: blueviolet;
+    opacity: 0.8;
+}
+
 .project-container{
     display: flex;
     justify-content: center;
@@ -31,6 +49,9 @@
     margin: 10px;
 }
 
+.projects-navigation input[type="radio"]{
+    color:blueviolet;
+}
 .project-tab{
     display: flex;
     flex-direction: column;
@@ -39,10 +60,14 @@
     height: 450px;
     padding: 5px;
     margin: 5px;
-    background-color: white;
+    background-color: black;
+    border-color: blueviolet;
+    border-radius: 5px;
+    border-width: 3px;
+    border-style: solid;
     color: black;
     position: absolute;
-    border-radius: 5px;
+    color: white;
     --r: calc(var(--position) - var(--offset));
     --abs: max(var(--r), var(--r) * -1);
     transition: all 0.25s linear;

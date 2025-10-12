@@ -4,19 +4,119 @@
     margin: 0 auto;
     padding: 20px;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.about-me h2{
+    display: inline-flex;
+    width: 100%;
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    border-top: 0px;
+    border-left: 0px;
+    border-right:0px;
+    border-spacing: 2px;
+    border-bottom: 3px;
+    border-style: solid;
+    border-color: blueviolet;
+    opacity: 0.8;
+}
+.about-me h2 span{
+    height: max-content;
+    font-size: 30px;
 }
 
 .about-me p{
+    position: relative;
     margin-bottom: 5px;
     margin-top: 5px;
+    transform: translateY(50px);
+    opacity: 0;
+    --delay: 0s;
 }
 
 .about-me p:nth-child(even){
     width: 50%;
-    align-self: flex-start;
+    margin-left: auto;
+    animation: fade-anim 1.0s ease-in-out calc(var(--delay) + 1.5s) forwards;
 }
 
 .about-me p:nth-child(odd){
     width: 50%;
-    align-self: flex-end;
+    margin-right: auto;
+    animation: fade-anim 1.0s ease-in-out calc(var(--delay) + 1.5s) forwards;
+}
+
+.about-me p:nth-child(1){
+    --delay: 0.0s;
+}
+
+.about-me p:nth-child(2){
+    --delay: 0.5s;
+}
+.about-me p:nth-child(3){
+    --delay: 1.0s;
+}
+.about-me p:nth-child(4){
+    --delay: 1.5s;
+}
+.about-me p:nth-child(5){
+    --delay: 2.0s;
+}
+.about-me p:nth-child(6){
+    --delay: 2.5s;
+}
+.about-me p:nth-child(7){
+    --delay: 3.0s;
+}
+
+.socials{
+    display: flex;
+    justify-content: right;
+    --imgdelay: 0.0s;
+}
+
+.socials img:nth-child(1){
+    --imgdelay: 0.0s;
+}
+.socials img:nth-child(2){
+    --imgdelay: 0.5s;
+}
+.socials img:nth-child(3){
+    --imgdelay: 1.0s;
+}
+.socials img:nth-child(4){
+    --imgdelay: 1.5s;
+}
+
+.socials img{
+    display: flex;
+    translate: 0 100%;
+    opacity: 0;
+    animation: show-socials 1.0s ease-in-out calc(var(--imgdelay) + 5.0s) forwards;
+}
+@keyframes fade-anim {
+    0%{
+        opacity: 0;
+        transform: translateY(50px); 
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px); 
+    }
+}
+
+@keyframes show-socials{
+    0%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 1;
+        translate: 0 -20%;
+    }
+    100%{
+        opacity: 1;
+        translate: 0 0;
+    }
 }

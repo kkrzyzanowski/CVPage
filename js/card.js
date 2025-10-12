@@ -34,17 +34,13 @@ export class Card {
                 $(this.textElement).off('animationend', handler);
                 this.textElement.classList.remove("minimizeText");
                 this.textElement.style.transform = "translate(-50%, -50%) scale(0.2) rotate(-90deg)";
-
-                
-                let backButton = this.card.querySelector(".back-button");
-                backButton.classList.add("active");
     
                 this.resolveHiddenCard();
                 resolve();
             };
             $(this.textElement).on('animationend', handler);
+            
         });
-
     }
 
     async StartHideCardAnimation() {
@@ -155,6 +151,12 @@ export class Card {
     resolveHiddenCard() {
         document.dispatchEvent(new Event("activeCardDone"));
     }
+
+    ActiveBackButton(){
+        let backButton = this.card.querySelector(".back-button");
+        backButton.classList.add("active");
+    }
+
 
     constructor(id) {
         this.card = document.getElementById(id);
