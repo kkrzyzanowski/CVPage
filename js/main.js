@@ -35,7 +35,8 @@ export async function runAnimation($event){
             });
         });
         
-        await runContent($event);
+        await runContent();
+        await loadContent($event);
         activeCard.ActiveBackButton();
     }
     else
@@ -48,17 +49,23 @@ export async function runAnimation($event){
     }
 }
 
-function runContent(index){
+function runContent(){
     return new Promise(resolve => {
     content.classList.add("show");
     menu.classList.remove("show");
     menu.classList.add("hide");
     setTimeout(() => {
-        contentLoader(index);
-        Promise.resolve().then(resolve);
-    }, 5000); // to calculate
-});
-        
+        resolve();
+    }, 1000);
+    });
+}
+function loadContent(index){
+     return new Promise(resolve => {
+         setTimeout(() => {
+             contentLoader(index);
+             Promise.resolve().then(resolve);
+         }, 4000); 
+     });
 }
 
 async function hideContent(){
@@ -85,8 +92,18 @@ async function hideContent(){
     // }, 3100);
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export function InitializeClick(){
 
+    sleep(1000).then(() => {
+        var loader = document.getElementById("loader");
+        if(loader){
+            loader.style.display = "none";
+        }
+    });
     document.querySelectorAll("#list > li").forEach(item => {
         item.addEventListener("click", () => runAnimation(item.id));
     });

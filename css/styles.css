@@ -105,16 +105,16 @@ font-family: "Tektur", sans-serif;
     animation-play-state: running;
 }
 .content.show{
-    animation: show-content 1.5s linear forwards;
-    animation-delay: 5s;
+    animation: show-content 1s linear forwards;
+    animation-delay: 2s;
 }
 .content.hide{
     animation: show-content 1.5s linear reverse forwards;
     animation-delay: 0s;
 }
 .menu.hide{
-    animation: small-panel 1s linear forwards; 
-    animation-delay: 5s;
+    animation: small-panel 1.5s linear forwards; 
+    animation-delay: 0.5s;
     /* width:25%;
     max-width: 400px;
     min-width: 300px; */
@@ -311,17 +311,13 @@ font-family: "Tektur", sans-serif;
     }
     100%
     {
-        width:25%;
-        max-width: 400px;
-        min-width: 300px;
+        width:300px;
     }
 }
 
 @keyframes big-panel{
     0%{
-        width:25%;
-        max-width: 400px;
-        min-width: 300px;
+        width:300px;
     }
 
     100%{
@@ -351,3 +347,30 @@ font-family: "Tektur", sans-serif;
       transform: skewY(0deg) scale(1) translateX(0%);
     }
   }
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 12px solid #f3f3f3;
+    border-top: 12px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

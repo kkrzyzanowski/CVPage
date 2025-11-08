@@ -100,16 +100,6 @@ export class Card {
             });
         })
 
-
-        //await this.waitForRemoveTranslation();
-
-              
-        
-        // requestAnimationFrame(() => {
-        //     this.card.style.transition = "transform 0.5s ease";
-        //     this.card.style.transform = "translate(0,0)";
-        // });
-
         this.isActive = false;
 
     }
