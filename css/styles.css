@@ -49,6 +49,7 @@ canvas {
     overflow: hidden;
     opacity: 0.7;
     background-color: black;
+    z-index: 1;
 
 font-family: "Tektur", sans-serif;
   font-optical-sizing: auto;
@@ -87,7 +88,6 @@ font-family: "Tektur", sans-serif;
 }
 
 .card.active{
-    /* position: absolute; */
     animation :move-left 3s linear forwards;
 }
 
@@ -128,6 +128,14 @@ font-family: "Tektur", sans-serif;
     border-style: solid;
     border-width: 3px;
     border-color: blueviolet;
+}
+
+.card.front{
+    z-index: 1;
+}
+
+.card.back{
+    z-index: -1;
 }
 
 .card.skills-color{
@@ -247,7 +255,6 @@ font-family: "Tektur", sans-serif;
         opacity: 0;
         width: 0%;
         margin: 0px;
-        visibility: hidden;
     }
 }
 
@@ -260,21 +267,19 @@ font-family: "Tektur", sans-serif;
     }
 }
 
-@keyframes hide-panel
-{
+@keyframes hide-panel{
+    
     100%{
         width: 0%;
         height: 0px;
     }
 }
 
-@keyframes minimize-tabs
-{
+@keyframes minimize-tabs{
     100%{
-        height: 0%;
-        overflow: hidden;
+        height: 0px;
         opacity: 0;
-        z-index: -1; 
+        overflow: hidden;
     }
 }
 

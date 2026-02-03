@@ -44,15 +44,14 @@ export class Card {
     }
 
     async StartHideCardAnimation() {
-
-
+        
         this.card.classList.add("hoverCard");
         this.card.classList.remove("show");
         void this.card.offsetWidth;
+        this.card.classList.remove("front");
         this.card.classList.add("hidden");
-
         await this.waitForActiveCard();
-
+        this.card.classList.add("back");
         this.card.classList.add("inactive");
     }
 
@@ -110,6 +109,8 @@ export class Card {
     }
 
     HiddenCardsShow(){
+        this.card.classList.remove("back");
+        this.card.classList.add("front");
         this.card.classList.add("show");
     }
 
