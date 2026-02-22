@@ -1,5 +1,4 @@
-
-:root{
+:root {
     --menu-transition-delay: 5s;
     --skills-transition: 100%;
 }
@@ -19,16 +18,16 @@ canvas {
     padding: 0;
 }
 
-.menu{
+.menu {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100%;
     position: relative;
-   
+
 }
 
-.list{
+.list {
     display: flex;
     list-style: none;
     height: 100%;
@@ -37,12 +36,12 @@ canvas {
     position: absolute;
 }
 
-.card{
+.card {
     display: flex;
     height: 100%;
     width: 30%;
     border-radius: 15px;
-    align-items: flex-end;  
+    align-items: flex-end;
     justify-content: flex-start;
     margin: 15px;
     position: relative;
@@ -51,15 +50,19 @@ canvas {
     background-color: black;
     z-index: 1;
 
-font-family: "Tektur", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
-.card a{
+.card.to-zero {
+    transform: translateX(var(--move, 0));
+}
+
+.card a {
     transform: rotate(-90deg) scale(1.0);
     font-size: 180px;
     margin: 40px;
@@ -70,135 +73,151 @@ font-family: "Tektur", sans-serif;
     transition: transform 1s ease;
 }
 
-.card.minimize{
-  animation: minimize-card 2s ease 1s forwards; 
-  animation-play-state: running;
-}
-.card.maximize{
-    animation: minimize-card 2s ease reverse forwards; 
-    animation-play-state: running;
-  }
-
-.card.hidden{
-    animation: minimize-tabs 1s linear forwards; 
-}
-
-.card.inactive{
-    animation: hide-card 1s linear forwards
-}
-
-.card.active{
-    animation :move-left 3s linear forwards;
-}
-
-.card.show{
-    animation: minimize-tabs 1s linear reverse forwards; 
-}
-
-.card a.minimizeText{
-    animation: text-off 1s linear forwards; 
+.card.minimize {
+    animation: minimize-card 2s ease 1s forwards;
     animation-play-state: running;
 }
 
-.card a.maximizeText{
-    animation: text-off 1s linear reverse forwards; 
+.card.maximize {
+    animation: minimize-card 2s ease reverse forwards;
     animation-play-state: running;
 }
-.content.show{
+
+.card.hidden {
+    animation: hide-card-vertical 1s linear forwards,
+        hide-card-horizontal 1s linear 1s forwards;
+}
+
+.card.show {
+    animation: show-card-horizontal 1s linear forwards,
+        show-card-vertical 1s linear 1s forwards;
+}
+
+.card.activate {
+    animation: move-left 3s linear forwards;
+}
+
+.card.deactivate {
+    animation: move-left 2s linear reverse forwards;
+}
+
+.card a.minimizeText {
+    animation: text-off 1s linear forwards;
+}
+
+.card a.minimized{
+    transform: rotate(-90deg) scale(0.2);
+}
+
+.card a.maximized{
+    transform: rotate(-90deg) scale(1.0);
+}
+
+.card a.maximizeText {
+    animation: text-off 1s linear reverse forwards;
+}
+
+.content.show {
     animation: show-content 1s linear forwards;
     animation-delay: 2s;
 }
-.content.hide{
+
+.content.hide {
     animation: show-content 1.5s linear reverse forwards;
     animation-delay: 0s;
 }
-.menu.hide{
-    animation: small-panel 1.5s linear forwards; 
+
+.menu.hide {
+    animation: small-panel 1.5s linear forwards;
     animation-delay: 0.5s;
     /* width:25%;
     max-width: 400px;
     min-width: 300px; */
 }
 
-.menu.show{
-    animation: big-panel 1s linear forwards; 
+.menu.show {
+    animation: big-panel 1s linear forwards;
     animation-delay: 0s;
 }
-.card.about-me-color{
+
+.card.about-me-color {
     border-style: solid;
     border-width: 3px;
     border-color: blueviolet;
 }
 
-.card.front{
+.card.front {
     z-index: 1;
 }
 
-.card.back{
+.card.back {
     z-index: -1;
 }
 
-.card.skills-color{
+.card.skills-color {
     border-style: solid;
     border-width: 3px;
     border-color: rgb(110, 34, 182);
 }
-.card.projects-color{
+
+.card.projects-color {
     border-style: solid;
     border-width: 3px;
     border-color: rgb(89, 25, 148);
 }
 
-.menu .card:not(.hoverCard):hover a{
+.menu .card:not(.hoverCard):hover a {
     position: relative;
     animation: move-text 2s ease-out;
 }
 
-.card.about-me-color:hover{
+.card.about-me-color:hover {
     box-shadow: 0 0 10px blueviolet, 0 0 20px blueviolet, 0 0 30px blueviolet;
     border-style: solid;
     border-width: 3px;
     border-color: blueviolet;
 }
-.card.skills-color:hover{
+
+.card.skills-color:hover {
     box-shadow: 0 0 10px rgb(110, 34, 182), 0 0 20px rgb(110, 34, 182), 0 0 30px rgb(110, 34, 182);
     border-style: solid;
     border-width: 3px;
     border-color: rgb(110, 34, 182)
 }
-.card.projects-color:hover{
+
+.card.projects-color:hover {
     box-shadow: 0 0 10px rgb(89, 25, 148), 0 0 20px rgb(89, 25, 148), 0 0 30px rgb(89, 25, 148);
     border-style: solid;
     border-width: 3px;
     border-color: rgb(89, 25, 148);
 }
 
-.container{
+.container {
     width: 100%;
     margin: 0 auto;
     padding: 15px;
     display: flex;
     height: 100%;
-    color: white; 
+    color: white;
     position: relative;
 }
 
-.logo{
+.logo {
     width: 20%;
 }
 
-.data{
+.data {
     overflow: hidden;
     display: flex;
     opacity: 0;
 }
 
-.content{
+.content {
     width: 0%;
     background-color: black;
     border-style: solid;
     border-width: 0px;
-    border-color:#8a2be2;
+    border-color: #8a2be2;
     height: 95%;
     margin-top: 15px;
     translate: 150px;
@@ -206,7 +225,7 @@ font-family: "Tektur", sans-serif;
     position: absolute;
 }
 
-.back-button{
+.back-button {
     margin: 15px;
     display: flex;
     position: absolute;
@@ -220,17 +239,18 @@ font-family: "Tektur", sans-serif;
 }
 
 
-.back-button.active{
+.back-button.active {
     display: flex;
     left: 0%;
     opacity: 1;
     animation: spring-pop 1.2s ease-out forwards;
 }
 
-.back-button p:nth-child(1){
+.back-button p:nth-child(1) {
     font-size: 60px;
 }
-.back-button p:nth-child(2){
+
+.back-button p:nth-child(2) {
     font-size: 20px;
 }
 
@@ -239,119 +259,149 @@ font-family: "Tektur", sans-serif;
     0% {
         bottom: 0%;
     }
-    50%{
+
+    50% {
         bottom: 50%;
     }
-    100%{
+
+    100% {
         bottom: 0%;
     }
 }
 
-@keyframes hide-card{
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 0;
+@keyframes hide-card-horizontal {
+    100% {
         width: 0%;
         margin: 0px;
     }
 }
 
-@keyframes minimize-card
-{
-    100%{
+@keyframes hide-card-vertical {
+    100% {
+        opacity: 0;
+        height: 0px;
+    }
+}
+
+@keyframes show-card-horizontal {
+    0% {
+        width: 0%;
+        margin: 0px;
+        height: 0%;
+    }
+    100% {
+        width: 30%;
+        margin: 15px;
+        height: 0%;
+    }
+}
+
+@keyframes show-card-vertical {
+    0% {
+        opacity: 0;
+        height: 0px;
+    }
+    100% {
+        opacity: 0.7;
+        height: 100%;
+    }
+}
+
+@keyframes minimize-card {
+    100% {
         width: 15%;
         height: 100%;
         min-width: 120px;
     }
 }
 
-@keyframes hide-panel{
-    
-    100%{
+@keyframes hide-panel {
+
+    100% {
         width: 0%;
         height: 0px;
     }
 }
 
-@keyframes minimize-tabs{
-    100%{
-        height: 0px;
-        opacity: 0;
-        overflow: hidden;
+@keyframes move-left {
+    0% {
+        transform: translateX(var(--move, 0));
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
 
-@keyframes move-left
-{
-    100%{
-        left: 0%
-    }
-}
-@keyframes text-off{
+@keyframes text-off {
     0% {
         transform: translate(0, 0) scale(1) rotate(-90deg);
     }
+
     100% {
         transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
     }
 }
 
-@keyframes show-content{
-    0%{
+@keyframes show-content {
+    0% {
         width: 0%;
         border-width: 0px;
     }
 
-    100%{
+    100% {
         width: 80%;
-        border-width: 3px;   
+        border-width: 3px;
     }
 }
 
-@keyframes small-panel{
-    0%{
-        width:100%;
+@keyframes small-panel {
+    0% {
+        width: 100%;
     }
-    100%
-    {
-        width:300px;
+
+    100% {
+        width: 300px;
     }
 }
 
-@keyframes big-panel{
-    0%{
-        width:300px;
+@keyframes big-panel {
+    0% {
+        width: 300px;
     }
 
-    100%{
-        width:100%;
+    100% {
+        width: 100%;
     }
 }
 
 @keyframes spring-pop {
     0% {
-      transform: skewY(0deg) scale(1) translateX(-100%);
-      opacity: 0;
+        transform: skewY(0deg) scale(1) translateX(-100%);
+        opacity: 0;
     }
+
     20% {
-      transform: skewY(0deg) scale(1) translateX(-20%);
-      opacity: 1;
+        transform: skewY(0deg) scale(1) translateX(-20%);
+        opacity: 1;
     }
+
     40% {
-      transform: skewY(10deg) scale(0.97) translateX(5%);
+        transform: skewY(10deg) scale(0.97) translateX(5%);
     }
+
     75% {
-      transform: skewY(20deg) scale(1.02) translateX(15%);
+        transform: skewY(20deg) scale(1.02) translateX(15%);
     }
+
     90% {
         transform: skewY(10deg) scale(0.97) translateX(5%);
-      }
-    100% {
-      transform: skewY(0deg) scale(1) translateX(0%);
     }
-  }
+
+    100% {
+        transform: skewY(0deg) scale(1) translateX(0%);
+    }
+}
 
 .loader {
     position: fixed;
@@ -376,6 +426,11 @@ font-family: "Tektur", sans-serif;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

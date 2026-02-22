@@ -41,11 +41,9 @@ export async function runAnimation($event){
     }
     else
     {
-        hideContent();
+        await hideContent();
         await activeCard.BackActiveCardToDefault();
         await Promise.all(hideCards.map(x => x.BackHiddenCardToDefault()));
-        activeCard.BackDefaultCardPosition();
-        hideCards.map(x => x.HiddenCardsShow())
     }
 }
 
