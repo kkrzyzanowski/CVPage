@@ -9,17 +9,29 @@
 
 .skills h2{
     display: inline-flex;
+    position: relative;
     width: 100%;
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
-    border-top: 0px;
-    border-left: 0px;
-    border-right:0px;
-    border-spacing: 2px;
-    border-bottom: 3px;
-    border-style: solid;
     border-color: blueviolet;
     opacity: 0.8;
+}
+
+.skills h2::after{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background-color: blueviolet;
+    animation: header-line 0.5s ease-in-out 0.0s forwards;
+}
+
+
+.skills h2 .header-text{
+    opacity: 0;
+    animation: header-text-up 0.45s ease-in-out 0.0s forwards;
 }
 .skills h2 span{
     height: max-content;
@@ -36,6 +48,8 @@
     overflow: hidden;
     align-self: center;
     height: 100%;
+    opacity: 0;
+    animation: show-skills 1.5s ease-in-out 0.5s forwards;
 }
 
 .skill-tab{
@@ -109,4 +123,19 @@
 .skill-active{
     transform: translateX(0);
     pointer-events: auto;
+}
+
+
+@keyframes show-skills{
+    0%{
+        opacity: 0;
+    }
+    70%{
+        opacity: 1;
+        translate: 0 -10%;
+    }
+    100%{
+        opacity: 1;
+        translate: 0 0;
+    }
 }
