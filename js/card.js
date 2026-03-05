@@ -123,10 +123,6 @@ export class Card {
         this.card.style.transform = "translate(0, 0)";
     }
 
-    HiddenCardsShow() {
-
-    }
-
     async BackHiddenCardToDefault() {
         this.card.classList.remove("back");
         this.card.classList.add("front");
