@@ -41,7 +41,7 @@ export async function runAnimation($event){
     }
     else
     {
-        await hideContent();
+        await hideContentBox();
         await activeCard.BackActiveCardToDefault();
         await Promise.all(hideCards.map(x => x.BackHiddenCardToDefault()));
     }
@@ -66,8 +66,9 @@ function loadContent(index){
      });
 }
 
-async function hideContent(){
+async function hideContentBox(){
 
+    await hideContentValue();
     await new Promise (resolve => {
         content.classList.remove("show");
         void content.offsetWidth;
@@ -90,6 +91,18 @@ async function hideContent(){
     // }, 3100);
 }
 
+async function hideContentValue(card){
+    const contentContainer = content.querySelector(".content-container");
+    if(contentContainer){
+        contentContainer.classList.add("hide");
+        await new Promise(resolve => {
+            contentContainer.addEventListener('animationend', function handler() {
+                contentContainer.removeEventListener('animationend', handler);
+                resolve();
+            });
+        });
+    }      
+}
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
