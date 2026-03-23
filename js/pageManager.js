@@ -93,6 +93,16 @@ async function hideContentBox(){
 
 async function hideContentValue(card){
     const contentContainer = content.querySelector(".content-container");
+    const contentHeader = content.querySelector(".header");
+    if(contentHeader){
+        contentHeader.classList.add("onclose");
+        await new Promise(resolve => {
+            contentHeader.addEventListener('animationend', function handler() {
+                contentHeader.removeEventListener('animationend', handler);
+                resolve();
+            });
+        });
+    }
     if(contentContainer){
         contentContainer.classList.add("hide");
         await new Promise(resolve => {
@@ -103,6 +113,7 @@ async function hideContentValue(card){
         });
     }      
 }
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

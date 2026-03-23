@@ -141,6 +141,15 @@
     }
 }
 
+@keyframes header-line-close {
+    0%{
+        width: 100%;
+    }
+    100%{
+        width: 0%;
+    }
+}
+
 @keyframes header-text-up {
     0%{
         transform: translateY(100%);
@@ -150,4 +159,8 @@
         transform: translateY(0%);
         opacity: 1;
     }
+}
+
+.header.onclose::after {
+    animation: header-line-close 0.5s ease-in-out 0.0s forwards;
 }
