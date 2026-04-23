@@ -169,3 +169,7 @@
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     animation: hide-skills 1.5s ease-in-out 0s forwards;
 }
+
+.header.onclose p{
+    animation: header-text-down 0.5s ease-in-out 0.0s forwards;
+}

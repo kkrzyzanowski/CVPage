@@ -5,7 +5,7 @@
     padding: 20px;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .about-me h2{
@@ -38,7 +38,7 @@
     font-size: 30px;
 }
 
-.about-me p{
+.about-me .content-container > p{
     position: relative;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -47,57 +47,61 @@
     --delay: 0s;
 }
 
-.about-me p:nth-child(even){
+.about-me .content-container{
+    margin-top: 30px;
+    overflow: hidden;
+}
+.about-me .content-container > p:nth-child(even){
     width: 50%;
     margin-left: auto;
     animation: fade-anim 1.0s ease-in-out calc(var(--delay) + 1.5s) forwards;
 }
 
-.about-me p:nth-child(odd){
+.about-me .content-container > p:nth-child(odd){
     width: 50%;
     margin-right: auto;
     animation: fade-anim 1.0s ease-in-out calc(var(--delay) + 1.5s) forwards;
 }
 
-.about-me p:nth-child(1){
+.about-me .content-container > p:nth-child(1){
     --delay: 0.0s;
 }
 
-.about-me p:nth-child(2){
+.about-me .content-container > p:nth-child(2){
     --delay: 0.5s;
 }
-.about-me p:nth-child(3){
+.about-me .content-container > p:nth-child(3){
     --delay: 1.0s;
 }
-.about-me p:nth-child(4){
+.about-me .content-container > p:nth-child(4){
     --delay: 1.5s;
 }
-.about-me p:nth-child(5){
+.about-me .content-container > p:nth-child(5){
     --delay: 2.0s;
 }
-.about-me p:nth-child(6){
+.about-me .content-container > p:nth-child(6){
     --delay: 2.5s;
 }
-.about-me p:nth-child(7){
+.about-me .content-container > p:nth-child(7){
     --delay: 3.0s;
 }
 
-.socials{
+.about-me .content-container .socials{
     display: flex;
     justify-content: right;
     --imgdelay: 0.0s;
 }
 
-.socials img:nth-child(1){
+.about-me .content-container .socials a:nth-child(1) img{
     --imgdelay: 0.0s;
 }
-.socials img:nth-child(2){
+.about-me .content-container .socials a:nth-child(2) img{
     --imgdelay: 0.5s;
 }
-.socials img:nth-child(3){
+.about-me .content-container .socials a:nth-child(3) img{
     --imgdelay: 1.0s;
 }
-.socials img:nth-child(4){
+.about-me .content-container .socials a:nth-child(4) img{
     --imgdelay: 1.5s;
 }
 
@@ -161,6 +165,27 @@
     }
 }
 
+@keyframes header-text-down {
+    0%{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
 .header.onclose::after {
     animation: header-line-close 0.5s ease-in-out 0.0s forwards;
+}
+
+.header.onclose p{
+    animation: header-text-down 0.5s ease-in-out 0.0s forwards;
+}
+
+.about-me-container.hide{
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    animation: hide-skills 1.5s ease-in-out 0s forwards;
 }

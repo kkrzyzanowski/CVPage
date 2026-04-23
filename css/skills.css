@@ -155,3 +155,7 @@
         translate: 0 100%;
     }
 }
+
+.header.onclose p{
+    animation: header-text-down 0.5s ease-in-out 0.0s forwards;
+}
