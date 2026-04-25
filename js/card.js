@@ -75,6 +75,8 @@ export class Card {
         this.textElement.classList.add("maximizeText");
         await new Promise(resolve => setTimeout(resolve, 1500));
         this.textElement.classList.add("maximized");
+        this.card.classList.remove("hoverCard");
+        this.textElement.classList.remove("maximizeText");
         this.isActive = false;
     }
 

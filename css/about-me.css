@@ -50,6 +50,7 @@
 .about-me .content-container{
     margin-top: 30px;
     overflow: hidden;
+    height: 100%;
 }
 .about-me .content-container > p:nth-child(even){
     width: 50%;
@@ -82,26 +83,23 @@
 .about-me .content-container > p:nth-child(6){
     --delay: 2.5s;
 }
-.about-me .content-container > p:nth-child(7){
-    --delay: 3.0s;
-}
 
-.about-me .content-container .socials{
+.about-me .socials{
     display: flex;
     justify-content: right;
     --imgdelay: 0.0s;
 }
 
-.about-me .content-container .socials a:nth-child(1) img{
+.about-me .socials a:nth-child(1) img{
     --imgdelay: 0.0s;
 }
-.about-me .content-container .socials a:nth-child(2) img{
+.about-me .socials a:nth-child(2) img{
     --imgdelay: 0.5s;
 }
-.about-me .content-container .socials a:nth-child(3) img{
+.about-me .socials a:nth-child(3) img{
     --imgdelay: 1.0s;
 }
-.about-me .content-container .socials a:nth-child(4) img{
+.about-me .socials a:nth-child(4) img{
     --imgdelay: 1.5s;
 }
 
