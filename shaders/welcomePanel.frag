@@ -23,15 +23,21 @@ void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
     st.x *= u_resolution.x / u_resolution.y;
     
-    float n = noise(st * 10.0 + u_time * 2.0);
+    float n = noise(st * 8.0 + u_time * 1.5);
+    float n2 = noise(st * 15.0 - u_time * 0.8);
     
-    // Dissolve effect: use noise as mask
-    float dissolve = step(0.5, n);
+    // Combined noise for more interesting effect
+    float combined = (n + n2) * 0.5;
     
-    vec3 color = vec3(0.0); // Background color
-    if (dissolve > 0.0) {
-        color = vec3(1.0); // Biały efekt dla lepszego blendu
-    }
+    // Create animated dissolve pattern
+    float dissolve = smoothstep(0.3, 0.7, combined + sin(u_time * 2.0) * 0.2);
     
-    gl_FragColor = vec4(color, dissolve * 0.8); // Przezroczysty biały efekt
+    // Color based on noise intensity
+    vec3 color = u_color * mix(vec3(0.0), vec3(1.0), dissolve);
+    
+    // Add some color variation
+    color.r *= 1.2;
+    color.b *= 1.1;
+    
+    gl_FragColor = vec4(color, dissolve * 0.8);
 }
