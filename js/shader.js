@@ -1,6 +1,3 @@
-const canvas = document.getElementById('background');
-const gl = canvas.getContext('webgl');
-
 // Ładujemy shadery z plików
 async function loadShaderSource(url) {
     const response = await fetch(url);
@@ -34,8 +31,84 @@ function createProgram(gl, vertexShader, fragmentShader) {
     return program;
 }
 
-// Główna funkcja inicjująca
-async function main() {
+async function initializeWelcomePanel(canvas) {
+    const welcomeGl = window.welcomeGl;
+    const welcomePanelCanvas = document.getElementById('welcome-canvas');
+    
+    const vertexSource = await loadShaderSource('../shaders/welcomePanel.vert');
+    const fragmentSource = await loadShaderSource('../shaders/welcomePanel.frag');
+
+    const vertexShader = createShader(welcomeGl, welcomeGl.VERTEX_SHADER, vertexSource);
+    const fragmentShader = createShader(welcomeGl, welcomeGl.FRAGMENT_SHADER, fragmentSource);
+    const program = createProgram(welcomeGl, vertexShader, fragmentShader);
+
+    const positionAttributeLocation = welcomeGl.getAttribLocation(program, "a_position");
+    const resolutionUniformLocation = welcomeGl.getUniformLocation(program, "u_resolution");
+    const timeUniformLocation = welcomeGl.getUniformLocation(program, "u_time");
+    const colorUniformLocation = welcomeGl.getUniformLocation(program, "u_color");
+
+    const positionBuffer = welcomeGl.createBuffer();
+    welcomeGl.bindBuffer(welcomeGl.ARRAY_BUFFER, positionBuffer);
+
+    // Pobieramy kolor z div'a welcome-panel
+    const welcomePanelDiv = document.querySelector('.welcome-panel');
+    const bgColor = window.getComputedStyle(welcomePanelDiv).backgroundColor;
+    const rgbMatch = bgColor.match(/\d+/g);
+    const color = rgbMatch ? [
+        parseInt(rgbMatch[0]) / 255,
+        parseInt(rgbMatch[1]) / 255,
+        parseInt(rgbMatch[2]) / 255
+    ] : [0.7, 0.0, 1.0]; // fallback na blueviolet
+
+    const positions = [
+        -1, -1,
+         1, -1,
+        -1,  1,
+        -1,  1,
+         1, -1,
+         1,  1,
+    ];
+    welcomeGl.bufferData(welcomeGl.ARRAY_BUFFER, new Float32Array(positions), welcomeGl.STATIC_DRAW);
+
+    function resizeCanvasToDisplaySize(canvas) {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+        }
+    }
+
+    function render(time) {
+        time *= 0.001; // na sekundy
+
+        resizeCanvasToDisplaySize(welcomePanelCanvas);
+        welcomeGl.viewport(0, 0, welcomeGl.canvas.width, welcomeGl.canvas.height);
+
+        welcomeGl.clearColor(0, 0, 0, 0);
+        welcomeGl.clear(welcomeGl.COLOR_BUFFER_BIT);
+
+        welcomeGl.useProgram(program);
+
+        // Atrybuty
+        welcomeGl.enableVertexAttribArray(positionAttributeLocation);
+        welcomeGl.bindBuffer(welcomeGl.ARRAY_BUFFER, positionBuffer);
+        welcomeGl.vertexAttribPointer(positionAttributeLocation, 2, welcomeGl.FLOAT, false, 0, 0);
+
+        // Uniformy
+        welcomeGl.uniform2f(resolutionUniformLocation, welcomeGl.canvas.width, welcomeGl.canvas.height);
+        welcomeGl.uniform1f(timeUniformLocation, time);
+        welcomeGl.uniform3f(colorUniformLocation, color[0], color[1], color[2]);
+
+        welcomeGl.drawArrays(welcomeGl.TRIANGLES, 0, 6);
+
+        requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+}
+
+async function initializeBackground(canvas) {
     const vertexSource = await loadShaderSource('../shaders/background.vert');
     const fragmentSource = await loadShaderSource('../shaders/background.frag');
 
@@ -52,7 +125,6 @@ async function main() {
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-    // Pełnoekranowy kwadrat
     const positions = [
         -1, -1,
          1, -1,
@@ -107,4 +179,29 @@ async function main() {
     requestAnimationFrame(render);
 }
 
-main();
+// Główna funkcja inicjująca
+async function main() {
+    const canvas = document.getElementById('background');
+    const welcomePanelCanvas = document.getElementById('welcome-canvas');
+    
+    if (!canvas || !welcomePanelCanvas) {
+        console.error('Canvas elements not found');
+        return;
+    }
+    
+    window.gl = canvas.getContext('webgl');
+    window.welcomeGl = welcomePanelCanvas.getContext('webgl');
+    
+    if (!window.gl || !window.welcomeGl) {
+        console.error('WebGL context not supported');
+        return;
+    }
+    
+    await Promise.all([
+        initializeBackground(canvas),
+        initializeWelcomePanel(welcomePanelCanvas),
+    ]);
+}
+
+// Czekamy na załadowanie DOM
+document.addEventListener('DOMContentLoaded', main);
