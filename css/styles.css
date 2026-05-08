@@ -130,9 +130,6 @@ canvas {
 .menu.hide {
     animation: small-panel 1.5s linear forwards;
     animation-delay: 0.5s;
-    /* width:25%;
-    max-width: 400px;
-    min-width: 300px; */
 }
 
 .menu.show {
@@ -166,7 +163,7 @@ canvas {
     border-color: rgb(89, 25, 148);
 }
 
-.menu .card:not(.hoverCard):hover a {
+.menu .card:hover a {
     position: relative;
     animation: move-text 2s ease-out;
 }
@@ -224,6 +221,88 @@ canvas {
     display: flex;
     position: absolute;
 }
+
+@media (max-width: 768px) {
+
+    .list {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+}
+    .content {
+    width: 95%;
+    background-color: black;
+    border-style: solid;
+    border-width: 0px;
+    border-color: #8a2be2;
+    height: 0%;
+    margin-top: 15px;
+    translate: 0 150px;
+    display: flex;
+    position: absolute;
+    }
+
+.card {
+    display: flex;
+    height: 30%;
+    width: 100%;
+    border-radius: 15px;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin: 15px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 1;
+
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+    }
+
+    .card a {
+    transform: scale(1.0);
+    font-size: 150px;
+    margin: 40px;
+    width: 100%;
+    white-space: nowrap;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transition: transform 1s ease;
+}
+
+    .card.hidden {
+    animation: hide-card-vertical 1s linear forwards,
+        hide-card-horizontal 1s linear 1s forwards;
+}
+
+.card.show {
+    animation: show-card-horizontal-for-mobile 1s linear forwards,
+        show-card-vertical-for-mobile 1s linear 1s forwards;
+}
+
+.card a.maximized{
+    transform: scale(1.0);
+}
+.menu.show {
+    animation: big-panel-for-mobile 1s linear forwards;
+    animation-delay: 0s;
+}
+.menu .card:hover a {
+    position: relative;
+    animation: move-text-for-mobile 2s ease-out;
+}
+}
+
+
 
 .back-button {
     margin: 15px;
@@ -297,6 +376,20 @@ canvas {
     }
 }
 
+@keyframes move-text-for-mobile {
+    0% {
+        left: 0%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    100% {
+        left: 0%;
+    }
+}
+
 @keyframes hide-card-horizontal {
     100% {
         width: 0%;
@@ -311,6 +404,7 @@ canvas {
     }
 }
 
+
 @keyframes show-card-horizontal {
     0% {
         width: 0%;
@@ -324,6 +418,20 @@ canvas {
     }
 }
 
+@keyframes show-card-horizontal-for-mobile {
+    0% {
+        width: 0%;
+        margin: 0px;
+        height: 0%;
+    }
+    100% {
+        width: 100%;
+        margin: 15px;
+        height: 0%;
+    }
+    
+}
+
 @keyframes show-card-vertical {
     0% {
         opacity: 0;
@@ -333,6 +441,18 @@ canvas {
         opacity: 0.7;
         height: 100%;
     }
+}
+
+@keyframes show-card-vertical-for-mobile {
+    0% {
+        opacity: 0;
+        height: 0px;
+    }
+    100% {
+        opacity: 0.7;
+        height: 30%;
+    }
+    
 }
 
 @keyframes minimize-card {
@@ -361,6 +481,16 @@ canvas {
 
     100% {
         transform: translateX(0);
+    }
+}
+
+@keyframes move-up {
+    0% {
+        transform: translateY(var(--move, 0));
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }
 
@@ -396,6 +526,16 @@ canvas {
     }
 }
 
+@keyframes small-panel-for-mobile {
+    0%{
+        height: 100%;
+    }
+
+    100% {
+        height: 300px;
+    }
+}
+
 @keyframes big-panel {
     0% {
         width: 300px;
@@ -404,6 +544,17 @@ canvas {
     100% {
         width: 100%;
     }
+}
+
+@keyframes big-panel-for-mobile {
+    0% {
+        height: 300px;
+    }
+
+    100% {
+        height: 100%;
+    }
+    
 }
 
 @keyframes spring-pop {
