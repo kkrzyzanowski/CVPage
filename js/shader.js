@@ -53,8 +53,8 @@ async function initializeWelcomePanel(canvas) {
     const welcomeGl = window.welcomeGl;
     const welcomePanelCanvas = document.getElementById('welcome-canvas');
     
-    const vertexSource = await loadShaderSource('./../shaders/welcomePanel.vert');
-    const fragmentSource = await loadShaderSource('./../shaders/welcomePanel.frag');
+    const vertexSource = await loadShaderSource('./shaders/welcomePanel.vert');
+    const fragmentSource = await loadShaderSource('./shaders/welcomePanel.frag');
 
     const vertexShader = createShader(welcomeGl, welcomeGl.VERTEX_SHADER, vertexSource);
     const fragmentShader = createShader(welcomeGl, welcomeGl.FRAGMENT_SHADER, fragmentSource);
@@ -131,8 +131,8 @@ async function initializeWelcomePanel(canvas) {
 }
 
 async function initializeBackground(canvas) {
-    const vertexSource = await loadShaderSource('./../shaders/background.vert');
-    const fragmentSource = await loadShaderSource('./../shaders/background.frag');
+    const vertexSource = await loadShaderSource('./shaders/background.vert');
+    const fragmentSource = await loadShaderSource('./shaders/background.frag');
 
     const gl = window.gl;
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexSource);
