@@ -1,11 +1,25 @@
 // Ładujemy shadery z plików
 async function loadShaderSource(url) {
     const response = await fetch(url);
-    return await response.text();
+    if (!response.ok) {
+        console.error('Failed to fetch shader:', url, response.status, response.statusText);
+        return null;
+    }
+    const text = await response.text();
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('text/html') || text.trim().startsWith('<')) {
+        console.error('Shader fetch returned HTML (likely 404 or redirect):', url);
+        return null;
+    }
+    return text;
 }
 
 // Tworzymy shader
 function createShader(gl, type, source) {
+    if (!source) {
+        console.error('createShader: empty source provided');
+        return null;
+    }
     const shader = gl.createShader(type);
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
@@ -19,6 +33,10 @@ function createShader(gl, type, source) {
 
 // Tworzymy program
 function createProgram(gl, vertexShader, fragmentShader) {
+    if (!vertexShader || !fragmentShader) {
+        console.error('createProgram: missing shader(s)', { vertexShader, fragmentShader });
+        return null;
+    }
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
@@ -41,6 +59,10 @@ async function initializeWelcomePanel(canvas) {
     const vertexShader = createShader(welcomeGl, welcomeGl.VERTEX_SHADER, vertexSource);
     const fragmentShader = createShader(welcomeGl, welcomeGl.FRAGMENT_SHADER, fragmentSource);
     const program = createProgram(welcomeGl, vertexShader, fragmentShader);
+    if (!program) {
+        console.error('Failed to create welcome panel program -- aborting welcome panel initialization.');
+        return;
+    }
 
     const positionAttributeLocation = welcomeGl.getAttribLocation(program, "a_position");
     const resolutionUniformLocation = welcomeGl.getUniformLocation(program, "u_resolution");
@@ -112,10 +134,15 @@ async function initializeBackground(canvas) {
     const vertexSource = await loadShaderSource('./../shaders/background.vert');
     const fragmentSource = await loadShaderSource('./../shaders/background.frag');
 
+    const gl = window.gl;
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
 
     const program = createProgram(gl, vertexShader, fragmentShader);
+    if (!program) {
+        console.error('Failed to create background program -- aborting background initialization.');
+        return;
+    }
 
     const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
     const resolutionUniformLocation = gl.getUniformLocation(program, "u_resolution");
