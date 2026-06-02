@@ -5,13 +5,13 @@ export function contentLoader(fileIndex) {
     console.log(fileIndex);
     switch (Number(fileIndex)) {
         case 0:
-            file = "./../about-me.html"
+            file = "./about-me.html"
             break;
         case 1:
-            file = "./../skills.html"
+            file = "./skills.html"
             break;
         case 2:
-            file = "./../projects.html"
+            file = "./projects.html"
             break;
     }
     fetch(file)
