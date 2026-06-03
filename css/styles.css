@@ -30,7 +30,7 @@ canvas {
 .list {
     display: flex;
     list-style: none;
-    height: 100%;
+    height: 99%;
     justify-content: flex-start;
     width: 100%;
     position: absolute;
@@ -43,7 +43,7 @@ canvas {
     border-radius: 15px;
     align-items: flex-end;
     justify-content: flex-start;
-    margin: 15px;
+    margin: 15px 15px 0px 15px;
     position: relative;
     overflow: hidden;
     opacity: 0.7;
@@ -62,9 +62,9 @@ canvas {
     transform: translateX(var(--move, 0));
 }
 
-.card a {
-    transform: rotate(-90deg) scale(1.0);
-    font-size: 180px;
+.card a{
+    transform: translateY(-50%) scale(1.0) rotate(-90deg);
+    font-size: 20vh;
     margin: 40px;
     width: 100%;
     height: max-content;
@@ -107,11 +107,11 @@ canvas {
 }
 
 .card a.minimized{
-    transform: rotate(-90deg) scale(0.2);
+    transform: translateY(-50%) rotate(-90deg) scale(0.2);
 }
 
 .card a.maximized{
-    transform: rotate(-90deg) scale(1.0);
+    transform: translateY(-50%) rotate(-90deg) scale(1.0);
 }
 
 .card a.maximizeText {
@@ -164,7 +164,7 @@ canvas {
     border-color: rgb(89, 25, 148);
 }
 
-.card:hover:not(.minimize) > a {
+.card:hover:has(.maximized) > a {
     position: relative;
     animation: move-text 2s ease-out;
 }
@@ -224,7 +224,7 @@ canvas {
 }
 
 .back-button {
-    margin: 15px;
+    padding: 15px;
     display: flex;
     position: absolute;
     flex-direction: column;
@@ -359,7 +359,7 @@ canvas {
 }
 
 .card a.minimized{
-    transform:  scale(0.2);
+    transform:  scale(0.2) translateX(50%);
 }
 
 .card a.maximized{
@@ -549,11 +549,14 @@ canvas {
 
 @keyframes text-off {
     0% {
-        transform: translate(0, 0) scale(1) rotate(-90deg);
+        transform: translateY(-50%) scale(1) rotate(-90deg);
+    }
+    10% {
+        transform: translateY(-100%) scale(1) rotate(-90deg);
     }
 
     100% {
-        transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
+        transform: translate(-50%, -100%) scale(0.2) rotate(-90deg);
     }
 }
 
