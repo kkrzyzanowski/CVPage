@@ -75,12 +75,12 @@ canvas {
 }
 
 .card.minimize {
-    animation: minimize-card 2s ease 1s forwards;
+    animation: minimize-card var(--translateXTime) ease 1s forwards;
     animation-play-state: running;
 }
 
 .card.maximize {
-    animation: minimize-card 2s ease reverse forwards;
+    animation: minimize-card var(--translateXTime) ease reverse forwards;
     animation-play-state: running;
 }
 

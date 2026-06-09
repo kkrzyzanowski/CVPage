@@ -2,12 +2,15 @@ import { contentDeloader, contentLoader } from "./contentLoader.js";
 import { Card } from "./card.js";
 
 let isContentRunned = false;
+let isAnimationInProgress = false;
 let cards = [];
 let elementsCount = 0;
 let menu = null;
 let content = null;
 
 export async function runAnimation($event){
+    if (isAnimationInProgress) return;
+    isAnimationInProgress = true;
     isContentRunned = !isContentRunned;
     for(var i = 0; i<elementsCount;i++)
     {
@@ -45,6 +48,7 @@ export async function runAnimation($event){
         await activeCard.BackActiveCardToDefault();
         await Promise.all(hideCards.map(x => x.BackHiddenCardToDefault()));
     }
+    isAnimationInProgress = false;
 }
 
 function runContent(){
@@ -81,14 +85,8 @@ async function hideContentBox(){
         }, 1600);
     });
    
-    //document.documentElement.style.setProperty('--menu-transition-delay', '4s');
-
     menu.classList.remove("hide");
-    //void menu.offsetWidth;
     menu.classList.add("show");
-    // setTimeout(() => {
-    //     menu.classList.remove("show");
-    // }, 3100);
 }
 
 async function hideContentValue(card){
@@ -127,7 +125,11 @@ export function InitializeClick(){
         }
     });
     document.querySelectorAll("#list > li").forEach(item => {
-        item.addEventListener("click", () => runAnimation(item.id));
+        item.addEventListener("click", () => {
+            if(!isAnimationInProgress){
+                runAnimation(item.id);
+            }
+        });
     });
 
     elementsCount = document.getElementById("list").

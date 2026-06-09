@@ -165,21 +165,20 @@ export class Card {
         backButton.classList.add("active");
     }
 
-
     constructor(id) {
         this.card = document.getElementById(id);
         this.textElement = this.card.firstElementChild;
         this.startCardPos = this.card.getBoundingClientRect();
         this.currentCardPos = this.startCardPos;
-        // initialize per-card move variable so keyframes using var(--move) work
-        this.updateMoveVar();
-        // keep --move updated on resize
-        window.addEventListener('resize', () => this.updateMoveVar());
+        this.initializeCardVariables(id);
+
+        window.addEventListener('resize', () => this.initializeCardVariables(id));
     }
 
-    updateMoveVar() {
-        // move the card to the container left (0) by translating it by -offsetLeft
+    initializeCardVariables(id) {
         const moveX = this.card.offsetLeft;
         this.card.style.setProperty('--move', `${moveX}px`);
+        const time = 0.5 + 1.0 * Number(id);
+        this.card.style.setProperty('--translateXTime', `${time}s`);
     }
 }
