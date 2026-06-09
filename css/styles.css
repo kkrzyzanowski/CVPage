@@ -58,6 +58,10 @@ canvas {
         "wdth" 100;
 }
 
+.card:hover{
+    cursor: pointer;
+}
+
 .card.to-zero {
     transform: translateX(var(--move, 0));
 }
@@ -577,7 +581,7 @@ canvas {
     }
 
     100% {
-        width: 80%;
+        width: 85%;
         border-width: 3px;
     }
 }

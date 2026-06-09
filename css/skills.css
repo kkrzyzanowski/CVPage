@@ -89,6 +89,11 @@
     z-index: 2;
 }
 
+.button-skills:hover{
+    color: black;
+    cursor: pointer;
+}
+
 .button-skills::after{
     content: '';
     position: absolute;
