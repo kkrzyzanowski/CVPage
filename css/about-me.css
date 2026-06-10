@@ -40,6 +40,7 @@
 
 .about-me .content-container > p{
     position: relative;
+    font-size: 2vh;
     margin-bottom: 5px;
     margin-top: 5px;
     transform: translateY(50px);
@@ -71,15 +72,19 @@
 .about-me .content-container > p:nth-child(2){
     --delay: 0.5s;
 }
+
 .about-me .content-container > p:nth-child(3){
     --delay: 1.0s;
 }
+
 .about-me .content-container > p:nth-child(4){
     --delay: 1.5s;
 }
+
 .about-me .content-container > p:nth-child(5){
     --delay: 2.0s;
 }
+
 .about-me .content-container > p:nth-child(6){
     --delay: 2.5s;
 }
@@ -88,6 +93,10 @@
     display: flex;
     justify-content: right;
     --imgdelay: 0.0s;
+}
+
+.about-me .socials.hide{
+    animation: hide-socials 1.0s ease-in-out 0s forwards;
 }
 
 .about-me .socials a:nth-child(1) img{
@@ -131,6 +140,16 @@
     100%{
         opacity: 1;
         translate: 0 0;
+    }
+}
+
+@keyframes hide-socials{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        translate: 0 100%;
     }
 }
 

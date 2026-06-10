@@ -91,6 +91,7 @@ async function hideContentBox(){
 
 async function hideContentValue(card){
     const contentContainer = content.querySelector(".content-container");
+    const contentItems = content.querySelectorAll(".item");
     const contentHeader = content.querySelector(".header");
     if(contentHeader){
         contentHeader.classList.add("onclose");
@@ -109,7 +110,24 @@ async function hideContentValue(card){
                 resolve();
             });
         });
-    }      
+    }
+        if(contentItems){
+            contentItems.forEach(item => {
+                item.classList.add("hide");
+            });
+            await new Promise(resolve => {
+                let animationCount = 0;
+                contentItems.forEach(item => {
+                    item.addEventListener('animationend', function handler() {
+                        item.removeEventListener('animationend', handler);
+                        animationCount++;
+                        if(animationCount === contentItems.length){
+                            resolve();
+                        }
+                    });
+                });
+            });
+        }
 }
 
 function sleep(ms) {

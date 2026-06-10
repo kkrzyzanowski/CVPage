@@ -64,6 +64,10 @@
     display: none;
 }
 
+.projects-navigation.item.hide{
+    animation: hide-button 0.5s ease-in-out 0s forwards;
+}
+
 .radio-label {
     display: inline-block;
     width: 20px;

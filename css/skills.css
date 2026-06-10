@@ -120,6 +120,10 @@
     right: 10px;
 }
 
+.button-skills.item.hide{
+    animation: hide-button 0.5s ease-in-out 0s forwards;
+}
+
 .skill-inactive{
     transform: translateX(100%);
     pointer-events: none;
@@ -156,6 +160,24 @@
         translate: 0 0;
     }
     100%{
+        opacity: 0;
+        translate: 0 100%;
+    }
+}
+
+@keyframes hide-button{
+    0%{
+        opacity: 1;
+    }
+    70%{
+        opacity: 1;
+        translate: 0 -10%;
+    }
+     90%{
+        opacity: 0;
+        translate: 0 -10%;
+    }
+     100%{
         opacity: 0;
         translate: 0 100%;
     }
