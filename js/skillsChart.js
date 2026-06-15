@@ -8,18 +8,24 @@ const ctx = document.getElementById('skillsChart').getContext('2d');
 new Chart(ctx, {
     type: 'radar',
     data: {
-        labels: ['Frontend', 'Backend', 'Graphics', 'Optimization', 'Game Dev', 'Lazyness'],
+        labels: ['Frontend', 'Backend', 'Graphics', 'Optimization', 'Game Dev', 'DevOps'],
         datasets: [{
-            label: 'My Skills',
-            data: [10, 70, 85, 90, 75, 100], // Twoje "statystyki"
-            backgroundColor: 'rgba(255, 255, 255, 0.53)',
+            data: [30, 60, 50, 40, 40, 0], // Twoje "statystyki"
+            backgroundColor: 'rgba(105, 17, 112, 0.62)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 2
         }]
     },
     options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
         scales: {
             r: { // "r" = radial scale, bo radar chart jest kołowy
+                min: 0,
+                max: 100,
                 angleLines: { color: "rgba(255, 255, 255, 0.3)" }, // Linie promieniowe
                 grid: { color: "rgba(255, 255, 255, 0.2)" }, // Linia okręgów
                 pointLabels: { 
@@ -43,18 +49,24 @@ export function drawPureSkillsChart(){
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['C++', 'C#', 'TypeSript', 'Python', 'Angular', 'test'],
+            labels: ['C++', 'C#', 'TypeSript', 'Python', 'Angular', 'JavaScript'],
             datasets: [{
-                label: 'My Skills',
-                data: [10, 70, 85, 90, 75, 100], // Twoje "statystyki"
-                backgroundColor: 'rgba(255, 255, 255, 0.53)',
+                data: [40, 60, 35, 25, 35, 40],
+                backgroundColor: 'rgba(105, 17, 112, 0.62)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2
             }]
         },
         options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             scales: {
                 r: { // "r" = radial scale, bo radar chart jest kołowy
+                    min: 0,
+                    max: 100,
                     angleLines: { color: "rgba(255, 255, 255, 0.3)" }, // Linie promieniowe
                     grid: { color: "rgba(255, 255, 255, 0.2)" }, // Linia okręgów
                     pointLabels: { 

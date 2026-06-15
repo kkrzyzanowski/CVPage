@@ -35,12 +35,12 @@
 }
 .about-me h2 span{
     height: max-content;
-    font-size: 30px;
+    font-size: 4vh;
 }
 
 .about-me .content-container > p{
     position: relative;
-    font-size: 2vh;
+    font-size: 2.5vh;
     margin-bottom: 5px;
     margin-top: 5px;
     transform: translateY(50px);

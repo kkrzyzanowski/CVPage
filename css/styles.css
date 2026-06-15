@@ -60,6 +60,9 @@ canvas {
 
 .card:hover{
     cursor: pointer;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(var(--rotateY));
+    transition: transform 0.5s ease;
 }
 
 .card.to-zero {
@@ -286,6 +289,10 @@ canvas {
 
 @media (max-width: 768px) {
 
+    .menu{
+        width: 95%;
+        position: relative;
+    }
     .list {
     display: flex;
     list-style: none;
@@ -311,10 +318,11 @@ canvas {
 
 .card {
     display: flex;
+    font-size: 5vh;
     height: 30%;
     width: 100%;
     border-radius: 15px;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
     margin: 15px;
     position: relative;
@@ -332,8 +340,11 @@ canvas {
     }
 
     .card a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     transform: scale(1.0);
-    font-size: 150px;
+    font-size: 15vh;
     margin: 40px;
     width: 100%;
     white-space: nowrap;
@@ -363,11 +374,16 @@ canvas {
 }
 
 .card a.minimized{
-    transform:  scale(0.2) translateX(50%);
+    transform: scale(0.5);;
 }
 
 .card a.maximized{
-    transform: scale(1.0);
+    transform: scale(1.0) rotate(0deg);
+}
+
+.card:hover:has(.maximized) > a {
+    position: relative;
+    animation: move-text-for-mobile 2s ease-out;
 }
 
 .card.activate {
@@ -381,12 +397,9 @@ canvas {
 .card a.minimizeText {
     animation: text-off-for-mobile 1s linear forwards;
 }
-
-.card a.minimized{
-    transform: translate(0, 37.5%) scale(0.2);
-
+.card a.maximizeText {
+    animation: text-off-for-mobile 1s linear reverse forwards;
 }
-
 .menu.hide {
     animation: small-panel-for-mobile 1.5s linear forwards;
     animation-delay: 0.5s;
@@ -395,10 +408,6 @@ canvas {
 .menu.show {
     animation: big-panel-for-mobile 1s linear forwards;
     animation-delay: 0s;
-}
-.menu .card:hover a {
-    position: relative;
-    animation: move-text-for-mobile 2s ease-out;
 }
 
 .content.show {
@@ -566,11 +575,11 @@ canvas {
 
 @keyframes text-off-for-mobile {
     0% {
-        transform: translateY(0) scale(1);
+        transform: translateX(0) scale(1) rotate(0deg);
     }
 
     100% {
-        transform: translateY(100px) scale(0.2);
+        transform: translateX(0%) scale(0.5);
     }
 }
 
