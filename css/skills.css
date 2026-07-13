@@ -186,3 +186,9 @@
 .header.onclose p{
     animation: header-text-down 0.5s ease-in-out 0.0s forwards;
 }
+.skills h2 .header-text{
+    opacity: 0;
+    animation: header-text-up 0.45s ease-in-out 0.0s forwards;
+    display: inline-flex;
+    align-items: center;
+}

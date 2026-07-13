@@ -32,6 +32,8 @@
 .about-me h2 .header-text{
     opacity: 0;
     animation: header-text-up 0.45s ease-in-out 0.0s forwards;
+    display: inline-flex;
+    align-items: center;
 }
 .about-me h2 span{
     height: max-content;
@@ -206,3 +208,10 @@
     -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
     animation: hide-skills 1.5s ease-in-out 0s forwards;
 }
+
+@media (max-width: 768px) {
+    .about-me .content-container > p:nth-child(even),
+    .about-me .content-container > p:nth-child(odd){
+        font-size: 2.0vh;
+    }
+}   

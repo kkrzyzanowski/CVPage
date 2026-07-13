@@ -180,8 +180,9 @@ export class Card {
         this.card.style.setProperty('--move', `${moveX}px`);
         const time = 0.5 + 1.0 * Number(id);
         this.card.style.setProperty('--translateXTime', `${time}s`);
-        const length = 3;
         const angle = (Number(id) * 1.5 - 1.5) * -10.0;
         this.card.style.setProperty('--rotateY', `${angle}deg`);
+        const scale = Math.abs((Number(id) * 1.5 - 1.5)) * 0.04 + 0.9;
+        this.card.style.setProperty('--scale', `${scale}`);
     }
 }

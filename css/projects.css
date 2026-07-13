@@ -53,11 +53,12 @@
 .projects-navigation{
     display: inline-flex;
     align-self: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     width: 100%;
     justify-content: center;
     margin: 10px;
+    overflow: hidden;
 }
 
 .projects-navigation input[type="radio"]{
@@ -95,12 +96,13 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
+
 .project-tab{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 340px;
-    height: 450px;
+    width: 48.5dvh;
+    height: 64dvh;
     padding: 5px;
     margin: 5px;
     background-color: black;
@@ -116,22 +118,26 @@
     transition: all 0.25s linear;
     transform:  translateX(calc(-100px * var(--r))) scale(calc(1 - 0.1 * var(--abs)));
     z-index: calc((var(--position) - var(--abs)));
+    opacity: calc(1 - 0.3 * var(--abs));
 }
 
 .project-tab img{
-    width: 320px;
-    height: 180px;
+    width: 46dvh;
+    height: 25.5dvh;
 }
 
 .project-tab:nth-of-type(1){
     --offset: 1;
 }
+
 .project-tab:nth-of-type(2){
     --offset: 2;
 }
+
 .project-tab:nth-of-type(3){
     --offset: 3;
 }
+
 .project-tab:nth-of-type(4){
     --offset: 4;
 }
@@ -148,7 +154,6 @@
     --position: 3;
 }
 
-
 .projects:has(#pos4:checked) .projects-container{
     --position: 4;
 }
@@ -158,6 +163,7 @@
     height: auto;
     margin-top: 10px;
 }
+
 .description{
     display: flex;
     justify-content: center;
@@ -204,4 +210,11 @@
 
 .header.onclose p{
     animation: header-text-down 0.5s ease-in-out 0.0s forwards;
+}
+
+.projects h2 .header-text{
+    opacity: 0;
+    animation: header-text-up 0.45s ease-in-out 0.0s forwards;
+    display: inline-flex;
+    align-items: center;
 }

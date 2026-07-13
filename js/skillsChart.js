@@ -14,7 +14,7 @@ new Chart(ctx, {
             backgroundColor: 'rgba(105, 17, 112, 0.62)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 2
-        }]
+        }],
     },
     options: {
         plugins: {
@@ -30,7 +30,7 @@ new Chart(ctx, {
                 grid: { color: "rgba(255, 255, 255, 0.2)" }, // Linia okręgów
                 pointLabels: { 
                     color: "white", 
-                    font: { size: 16, family: "Arial, sans-serif" }
+                    font: { size: 25, family: "Arial, sans-serif" }
                 },
                 ticks: { 
                     display: false, // Ukrywa liczby na osiach
@@ -49,13 +49,14 @@ export function drawPureSkillsChart(){
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['C++', 'C#', 'TypeSript', 'Python', 'Angular', 'JavaScript'],
+            labels: ['C++', 'C#', 'TypeSript', 'Python', 'Angular', 'JavaScript', 'Java'],
             datasets: [{
-                data: [40, 60, 35, 25, 35, 40],
+                data: [40, 60, 35, 25, 35, 40, 0],
                 backgroundColor: 'rgba(105, 17, 112, 0.62)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2
-            }]
+            }],
+
         },
         options: {
             plugins: {
@@ -71,7 +72,7 @@ export function drawPureSkillsChart(){
                     grid: { color: "rgba(255, 255, 255, 0.2)" }, // Linia okręgów
                     pointLabels: { 
                         color: "white", 
-                        font: { size: 16, family: "Arial, sans-serif" }
+                        font: { size: 25, family: "Arial, sans-serif" }
                     },
                     ticks: { 
                         display: false, // Ukrywa liczby na osiach

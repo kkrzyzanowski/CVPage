@@ -49,7 +49,9 @@ canvas {
     opacity: 0.7;
     background-color: black;
     z-index: 1;
-
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(var(--rotateY)) scale(var(--scale, 1.0));
+    
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -60,8 +62,7 @@ canvas {
 
 .card:hover{
     cursor: pointer;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(var(--rotateY));
+    transform: perspective(1000px) rotateY(0deg) scale(1.0);
     transition: transform 0.5s ease;
 }
 
@@ -82,6 +83,8 @@ canvas {
 }
 
 .card.minimize {
+    transition: transform 0.4s ease;
+    transform: perspective(1000px) rotateY(0deg) scale(1.0);
     animation: minimize-card var(--translateXTime) ease 1s forwards;
     animation-play-state: running;
 }
@@ -102,7 +105,7 @@ canvas {
 }
 
 .card.activate {
-    animation: move-left 3s linear forwards;
+    animation: move-left 3s linear 0.2s forwards, restore-card 0.2s linear;
 }
 
 .card.deactivate {
@@ -387,7 +390,7 @@ canvas {
 }
 
 .card.activate {
-    animation: move-up 3s linear forwards;
+    animation: move-up 3s linear forwards, restore-card 0.2s linear;
 }
 
 .card.deactivate {
@@ -704,5 +707,15 @@ canvas {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes restore-card {
+    0% {
+        transform: perspective(1000px) rotateY(var(--rotateY)) scale(var(--scale, 1.0));
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(0deg) scale(1.0);
     }
 }
