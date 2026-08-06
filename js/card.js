@@ -1,3 +1,5 @@
+import { waitForAnimation } from './promiseWrapper.js';
+
 export class Card {
     isActive = false;
     isHidden = false;
@@ -20,25 +22,28 @@ export class Card {
     async StartActiveCardAnimation() {
 
         $(this.textElement).off('animationend');
+        this.card.classList.remove("default-perspective");
+        void this.card.offsetWidth;
+        this.card.classList.add("real-perspective");
         this.card.classList.add("hoverCard");
         this.textElement.classList.remove("maximized");
         this.textElement.classList.remove("maximizeText");
         this.card.classList.remove("maximize");
         void this.card.offsetWidth;
         this.card.classList.add("minimize");
-        
+
         this.textElement.classList.add("minimizeText");
         await new Promise(resolve => {
             const handler = async () => {
-                
+
                 $(this.textElement).off('animationend', handler);
                 this.resolveHiddenCard();
                 resolve();
             };
             $(this.textElement).on('animationend', handler);
             this.textElement.classList.add("minimized");
-            
         });
+        this.textElement.style.width = "auto";
     }
 
     async StartHideCardAnimation() {
@@ -61,22 +66,24 @@ export class Card {
         this.card.classList.remove("minimize");
         void this.card.offsetWidth;
 
-        // uruchom maksymalizację karty i poczekaj stały czas (tu 2000ms + mały bufor)
         this.card.classList.add("maximize");
-        await new Promise(resolve => setTimeout(resolve, 2100)); // dopasuj jeśli zmienisz CSS
-
-        // teraz tekst
-
+        await new Promise(resolve => setTimeout(resolve, 2100));
         this.textElement.classList.remove("minimizeText");
         void this.textElement.offsetWidth;
-
-        // uruchom maksymalizację tekstu i poczekaj jego czas (tu 1000ms + buffer)
+        this.textElement.style.width = "100%";
         this.textElement.classList.remove("minimized");
+
         this.textElement.classList.add("maximizeText");
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await waitForAnimation(this.textElement, 'animationend');
+        setTimeout(() => { }, 1000);
         this.textElement.classList.add("maximized");
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
+        await waitForAnimation(this.textElement, 'animationend');
+
+        this.card.classList.remove("real-perspective");
+        void this.card.offsetWidth;
+        this.card.classList.add("default-perspective");
         this.isActive = false;
     }
 
@@ -131,9 +138,7 @@ export class Card {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         this.card.classList.remove("hoverCard");
-        
-        // NIE usuwaj hidden - po prostu dodaj show
-        // Element jest już w stanie końcowym hidden, teraz animuj show od tego miejsca
+
         this.card.classList.remove("hidden");
         void this.card.offsetWidth;
         this.card.classList.add("show");

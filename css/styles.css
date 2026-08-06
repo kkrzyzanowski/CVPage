@@ -49,9 +49,9 @@ canvas {
     opacity: 0.7;
     background-color: black;
     z-index: 1;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(var(--rotateY)) scale(var(--scale, 1.0));
-    
+    transform-style: preserve-3d; 
+    transform: perspective(1000px) rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1));  
+    transition: transform 0.2s ease;
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -62,8 +62,8 @@ canvas {
 
 .card:hover{
     cursor: pointer;
-    transform: perspective(1000px) rotateY(0deg) scale(1.0);
-    transition: transform 0.5s ease;
+    transform: perspective(1000px) rotateY(0deg) scale(1.0);  
+
 }
 
 .card.to-zero {
@@ -81,6 +81,15 @@ canvas {
     animation-fill-mode: forwards;
     transition: transform 1s ease;
 }
+
+.card.real-perspective {
+      --rotateY: 0deg;
+        --scale: 1;
+}
+
+.card.default-perspective {
+  --rotateY: var(--rotateY, 0deg);
+  --scale: var(--scale, 1);}
 
 .card.minimize {
     transition: transform 0.4s ease;
@@ -105,7 +114,7 @@ canvas {
 }
 
 .card.activate {
-    animation: move-left 3s linear 0.2s forwards, restore-card 0.2s linear;
+    animation: move-left 3s linear 0.2s forwards;
 }
 
 .card.deactivate {
@@ -390,7 +399,7 @@ canvas {
 }
 
 .card.activate {
-    animation: move-up 3s linear forwards, restore-card 0.2s linear;
+    animation: move-up 3s linear forwards;
 }
 
 .card.deactivate {

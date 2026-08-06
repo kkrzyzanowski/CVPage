@@ -8,27 +8,25 @@ let elementsCount = 0;
 let menu = null;
 let content = null;
 
-export async function runAnimation($event){
+export async function runAnimation($event) {
     if (isAnimationInProgress) return;
     isAnimationInProgress = true;
     isContentRunned = !isContentRunned;
-    for(var i = 0; i<elementsCount;i++)
-    {
+    for (var i = 0; i < elementsCount; i++) {
         var card = cards.find(x => x.card.id == i);
-        if(card)
-        {   
+        if (card) {
             card.isActive = $event == i ? true : false;
             card.isHidden = $event != i ? true : false;
         }
     }
-    var hideCards = cards.filter(x => { 
-        if(x.isHidden == true)
-            return x});
+    var hideCards = cards.filter(x => {
+        if (x.isHidden == true)
+            return x
+    });
     var activeCard = cards.find(x => x.isActive === true);;
-    if(isContentRunned)
-    {
+    if (isContentRunned) {
         hideCards.forEach(x => x.StartHideCardAnimation());
-        
+
         await new Promise(resolve => setTimeout(resolve, 1500));
         await new Promise(resolve => {
             activeCard.StartActiveCardAnimation();
@@ -37,13 +35,12 @@ export async function runAnimation($event){
                 resolve();
             });
         });
-        
+
         await runContent();
         await loadContent($event);
         activeCard.ActiveBackButton();
     }
-    else
-    {
+    else {
         await hideContentBox();
         await activeCard.BackActiveCardToDefault();
         await Promise.all(hideCards.map(x => x.BackHiddenCardToDefault()));
@@ -51,29 +48,29 @@ export async function runAnimation($event){
     isAnimationInProgress = false;
 }
 
-function runContent(){
+function runContent() {
     return new Promise(resolve => {
-    content.classList.add("show");
-    menu.classList.remove("show");
-    menu.classList.add("hide");
-    setTimeout(() => {
-        resolve();
-    }, 1000);
+        content.classList.add("show");
+        menu.classList.remove("show");
+        menu.classList.add("hide");
+        setTimeout(() => {
+            resolve();
+        }, 1000);
     });
 }
-function loadContent(index){
-     return new Promise(resolve => {
-         setTimeout(() => {
-             contentLoader(index);
-             Promise.resolve().then(resolve);
-         }, 4000); 
-     });
+function loadContent(index) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            contentLoader(index);
+            Promise.resolve().then(resolve);
+        }, 4000);
+    });
 }
 
-async function hideContentBox(){
+async function hideContentBox() {
 
     await hideContentValue();
-    await new Promise (resolve => {
+    await new Promise(resolve => {
         content.classList.remove("show");
         void content.offsetWidth;
         content.classList.add("hide");
@@ -81,19 +78,19 @@ async function hideContentBox(){
             content.classList.remove("hide");
             contentDeloader();
             resolve();
-        
+
         }, 1600);
     });
-   
+
     menu.classList.remove("hide");
     menu.classList.add("show");
 }
 
-async function hideContentValue(card){
+async function hideContentValue(card) {
     const contentContainer = content.querySelector(".content-container");
     const contentItems = content.querySelectorAll(".item");
     const contentHeader = content.querySelector(".header");
-    if(contentHeader){
+    if (contentHeader) {
         contentHeader.classList.add("onclose");
         await new Promise(resolve => {
             contentHeader.addEventListener('animationend', function handler() {
@@ -102,7 +99,7 @@ async function hideContentValue(card){
             });
         });
     }
-    if(contentContainer){
+    if (contentContainer) {
         contentContainer.classList.add("hide");
         await new Promise(resolve => {
             contentContainer.addEventListener('animationend', function handler() {
@@ -111,53 +108,52 @@ async function hideContentValue(card){
             });
         });
     }
-        if(contentItems){
+    if (contentItems) {
+        contentItems.forEach(item => {
+            item.classList.add("hide");
+        });
+        await new Promise(resolve => {
+            let animationCount = 0;
             contentItems.forEach(item => {
-                item.classList.add("hide");
-            });
-            await new Promise(resolve => {
-                let animationCount = 0;
-                contentItems.forEach(item => {
-                    item.addEventListener('animationend', function handler() {
-                        item.removeEventListener('animationend', handler);
-                        animationCount++;
-                        if(animationCount === contentItems.length){
-                            resolve();
-                        }
-                    });
+                item.addEventListener('animationend', function handler() {
+                    item.removeEventListener('animationend', handler);
+                    animationCount++;
+                    if (animationCount === contentItems.length) {
+                        resolve();
+                    }
                 });
             });
-        }
+        });
+    }
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function InitializeClick(){
+export function InitializeClick() {
 
     sleep(1000).then(() => {
         var loader = document.getElementById("loader");
-        if(loader){
+        if (loader) {
             loader.style.display = "none";
         }
     });
     document.querySelectorAll("#list > li").forEach(item => {
         item.addEventListener("click", () => {
-            if(!isAnimationInProgress){
+            if (!isAnimationInProgress) {
                 runAnimation(item.id);
             }
         });
     });
 
     elementsCount = document.getElementById("list").
-    querySelectorAll("#list>li").length;
-    for(var i =0; i<elementsCount; ++i)
-    {
+        querySelectorAll("#list>li").length;
+    for (var i = 0; i < elementsCount; ++i) {
         cards.push(new Card(i));
     }
-    content = document.getElementById("content");          
-    menu = document.getElementById("menu");  
+    content = document.getElementById("content");
+    menu = document.getElementById("menu");
 }
 
 
