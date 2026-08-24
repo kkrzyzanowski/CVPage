@@ -21,16 +21,24 @@ export class Card {
 
     async StartActiveCardAnimation() {
 
-        $(this.textElement).off('animationend');
-        this.card.classList.remove("default-perspective");
-        void this.card.offsetWidth;
-        this.card.classList.add("real-perspective");
+        await new Promise(resolve => {
+            const handler = async () => {
+                $(this.textElement).off('animationend', handler);
+                resolve();
+            }
+            this.card.classList.remove("default-perspective");
+                void this.card.offsetWidth;
+                this.card.classList.add("real-perspective");
+                this.card.classList.remove("maximize");
+                void this.card.offsetWidth;
+                this.card.classList.add("minimize");
+        });
+    }
+
+    async StartActiveCardAnimationAfter() {
         this.card.classList.add("hoverCard");
         this.textElement.classList.remove("maximized");
         this.textElement.classList.remove("maximizeText");
-        this.card.classList.remove("maximize");
-        void this.card.offsetWidth;
-        this.card.classList.add("minimize");
 
         this.textElement.classList.add("minimizeText");
         await new Promise(resolve => {
@@ -43,7 +51,6 @@ export class Card {
             $(this.textElement).on('animationend', handler);
             this.textElement.classList.add("minimized");
         });
-        this.textElement.style.width = "auto";
     }
 
     async StartHideCardAnimation() {
@@ -62,28 +69,26 @@ export class Card {
         let backButton = this.card.querySelector(".back-button");
         backButton.classList.remove("active");
 
-
-        this.card.classList.remove("minimize");
+        this.card.classList.remove("real-perspective");
         void this.card.offsetWidth;
+        this.card.classList.add("real-perspective");
 
-        this.card.classList.add("maximize");
-        await new Promise(resolve => setTimeout(resolve, 2100));
+        await new Promise(resolve => setTimeout(resolve, 2001));
         this.textElement.classList.remove("minimizeText");
         void this.textElement.offsetWidth;
-        this.textElement.style.width = "100%";
         this.textElement.classList.remove("minimized");
 
+        const maximizeTextAnimation = waitForAnimation(this.textElement, 'animationend');
         this.textElement.classList.add("maximizeText");
-        await waitForAnimation(this.textElement, 'animationend');
-        setTimeout(() => { }, 1000);
+        await maximizeTextAnimation;
+        await new Promise(resolve => setTimeout(resolve, 1000));
         this.textElement.classList.add("maximized");
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
-        await waitForAnimation(this.textElement, 'animationend');
+        this.card.classList.remove("minimize");
 
-        this.card.classList.remove("real-perspective");
         void this.card.offsetWidth;
-        this.card.classList.add("default-perspective");
+        this.card.classList.add("maximize");
         this.isActive = false;
     }
 
@@ -163,6 +168,16 @@ export class Card {
     }
     resolveHiddenCard() {
         document.dispatchEvent(new Event("activeCardDone"));
+    }
+
+    waitForForMenuResize() {
+        return new Promise(resolve => {
+            document.addEventListener("menuResizeDone", resolve, { once: true });
+        });
+    }
+
+    resolveMenuResize() {
+        document.dispatchEvent(new Event("menuResizeDone"))
     }
 
     ActiveBackButton() {

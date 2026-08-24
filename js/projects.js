@@ -37,7 +37,7 @@ export function loadVideoProjectsBehaviour() {
 };
 
 function loadEventsForProjects(){
-    document.querySelectorAll(".projects > button").forEach(button =>{
+    document.querySelectorAll(".projects-wrapper > button").forEach(button =>{
         button.addEventListener("click",() => ButtonProjectClick(button.dataset.direction))
     });
 

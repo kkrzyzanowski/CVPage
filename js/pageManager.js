@@ -28,15 +28,11 @@ export async function runAnimation($event) {
         hideCards.forEach(x => x.StartHideCardAnimation());
 
         await new Promise(resolve => setTimeout(resolve, 1500));
-        await new Promise(resolve => {
-            activeCard.StartActiveCardAnimation();
-            $(activeCard.textElement).on('animationend', function handler() {
-                $(activeCard.textElement).off('animationend', handler);
-                resolve();
-            });
-        });
-
+        activeCard.StartActiveCardAnimation();
+        
         await runContent();
+        await activeCard.StartActiveCardAnimationAfter();
+       
         await loadContent($event);
         activeCard.ActiveBackButton();
     }

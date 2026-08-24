@@ -49,9 +49,7 @@ canvas {
     opacity: 0.7;
     background-color: black;
     z-index: 1;
-    transform-style: preserve-3d; 
-    transform: perspective(1000px) rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1));  
-    transition: transform 0.2s ease;
+    transform-style: preserve-3d;
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -60,9 +58,9 @@ canvas {
         "wdth" 100;
 }
 
-.card:hover{
+.card:hover {
     cursor: pointer;
-    transform: perspective(1000px) rotateY(0deg) scale(1.0);  
+    transform: perspective(1000px) rotateY(0deg) scale(1.0);
 
 }
 
@@ -70,7 +68,7 @@ canvas {
     transform: translateX(var(--move, 0));
 }
 
-.card a{
+.card a {
     transform: translateY(-50%) scale(1.0) rotate(-90deg);
     font-size: 20vh;
     margin: 40px;
@@ -83,13 +81,14 @@ canvas {
 }
 
 .card.real-perspective {
-      --rotateY: 0deg;
-        --scale: 1;
+    --rotateY: 0deg;
+    --scale: 1;
 }
 
 .card.default-perspective {
-  --rotateY: var(--rotateY, 0deg);
-  --scale: var(--scale, 1);}
+    --rotateY: var(--rotateY, 0deg);
+    --scale: var(--scale, 1);
+}
 
 .card.minimize {
     transition: transform 0.4s ease;
@@ -99,6 +98,8 @@ canvas {
 }
 
 .card.maximize {
+    transition: transform 0.4s ease;
+    transform: perspective(1000px) rotateY(var(--rotateY, 0deg)) scale(var(--scale, 1));
     animation: minimize-card var(--translateXTime) ease reverse forwards;
     animation-play-state: running;
 }
@@ -125,11 +126,11 @@ canvas {
     animation: text-off 1s linear forwards;
 }
 
-.card a.minimized{
+.card a.minimized {
     transform: translateY(-50%) rotate(-90deg) scale(0.2);
 }
 
-.card a.maximized{
+.card a.maximized {
     transform: translateY(-50%) rotate(-90deg) scale(1.0);
 }
 
@@ -183,7 +184,7 @@ canvas {
     border-color: rgb(89, 25, 148);
 }
 
-.card:hover:has(.maximized) > a {
+.card:hover:has(.maximized)>a {
     position: relative;
     animation: move-text 2s ease-out;
 }
@@ -292,145 +293,150 @@ canvas {
     color: white;
     animation: fade-anim 1s ease-in-out forwards;
     filter: url(#noise-aura);
-    text-shadow: 
-        0 0 5px rgba(255,255,255,0.8),
-        0 0 10px rgba(255,255,255,0.6),
-        0 0 15px rgba(255,255,255,0.4);
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 
 @media (max-width: 768px) {
 
-    .menu{
+    .menu {
         width: 95%;
         position: relative;
     }
+
     .list {
-    display: flex;
-    list-style: none;
-    height: 100%;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    padding-right: 15px;
-}
-    .content {
-    width: 95%;
-    background-color: black;
-    border-style: solid;
-    border-width: 0px;
-    border-color: #8a2be2;
-    height: 0%;
-    margin-top: 15px;
-    translate: 0 150px;
-    display: flex;
-    position: absolute;
+        display: flex;
+        list-style: none;
+        height: 100%;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        padding-right: 15px;
     }
 
-.card {
-    display: flex;
-    font-size: 5vh;
-    height: 30%;
-    width: 100%;
-    border-radius: 15px;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 15px;
-    position: relative;
-    overflow: hidden;
-    opacity: 0.7;
-    background-color: black;
-    z-index: 1;
+    .content {
+        width: 95%;
+        background-color: black;
+        border-style: solid;
+        border-width: 0px;
+        border-color: #8a2be2;
+        height: 0%;
+        margin-top: 15px;
+        translate: 0 150px;
+        display: flex;
+        position: absolute;
+    }
 
-    font-family: "Tektur", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+    .card {
+        display: flex;
+        font-size: 5vh;
+        height: 30%;
+        width: 100%;
+        border-radius: 15px;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 15px;
+        position: relative;
+        overflow: hidden;
+        opacity: 0.7;
+        background-color: black;
+        z-index: 1;
+
+        font-family: "Tektur", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
     }
 
     .card a {
         display: flex;
         justify-content: center;
         align-items: center;
-    transform: scale(1.0);
-    font-size: 15vh;
-    margin: 40px;
-    width: 100%;
-    white-space: nowrap;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    transition: transform 1s ease;
-}
+        transform: scale(1.0);
+        font-size: 15vh;
+        margin: 40px;
+        width: 100%;
+        white-space: nowrap;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        transition: transform 1s ease;
+    }
 
     .card.hidden {
-    animation: hide-card-vertical 1s linear forwards,
-        hide-card-horizontal 1s linear 1s forwards;
-}
+        animation: hide-card-vertical 1s linear forwards,
+            hide-card-horizontal 1s linear 1s forwards;
+    }
 
-.card.show {
-    animation: show-card-horizontal-for-mobile 1s linear forwards,
-        show-card-vertical-for-mobile 1s linear 1s forwards;
-}
+    .card.show {
+        animation: show-card-horizontal-for-mobile 1s linear forwards,
+            show-card-vertical-for-mobile 1s linear 1s forwards;
+    }
 
-.card.minimize {
-    animation: minimize-card-for-mobile 2s ease 1s forwards;
-    animation-play-state: running;
-}
+    .card.minimize {
+        animation: minimize-card-for-mobile 2s ease 1s forwards;
+        animation-play-state: running;
+    }
 
-.card.maximize {
-    animation: minimize-card-for-mobile 2s ease reverse forwards;
-    animation-play-state: running;
-}
+    .card.maximize {
+        animation: minimize-card-for-mobile 2s ease reverse forwards;
+        animation-play-state: running;
+    }
 
-.card a.minimized{
-    transform: scale(0.5);;
-}
+    .card a.minimized {
+        transform: scale(0.5);
+        ;
+    }
 
-.card a.maximized{
-    transform: scale(1.0) rotate(0deg);
-}
+    .card a.maximized {
+        transform: scale(1.0) rotate(0deg);
+    }
 
-.card:hover:has(.maximized) > a {
-    position: relative;
-    animation: move-text-for-mobile 2s ease-out;
-}
+    .card:hover:has(.maximized)>a {
+        position: relative;
+        animation: move-text-for-mobile 2s ease-out;
+    }
 
-.card.activate {
-    animation: move-up 3s linear forwards;
-}
+    .card.activate {
+        animation: move-up 3s linear forwards;
+    }
 
-.card.deactivate {
-    animation: move-up 2s linear reverse forwards;
-}
+    .card.deactivate {
+        animation: move-up 2s linear reverse forwards;
+    }
 
-.card a.minimizeText {
-    animation: text-off-for-mobile 1s linear forwards;
-}
-.card a.maximizeText {
-    animation: text-off-for-mobile 1s linear reverse forwards;
-}
-.menu.hide {
-    animation: small-panel-for-mobile 1.5s linear forwards;
-    animation-delay: 0.5s;
-}
+    .card a.minimizeText {
+        animation: text-off-for-mobile 1s linear forwards;
+    }
 
-.menu.show {
-    animation: big-panel-for-mobile 1s linear forwards;
-    animation-delay: 0s;
-}
+    .card a.maximizeText {
+        animation: text-off-for-mobile 1s linear reverse forwards;
+    }
 
-.content.show {
-    animation: show-content-for-mobile 1s linear forwards;
-    animation-delay: 2s;
-}
+    .menu.hide {
+        animation: small-panel-for-mobile 1.5s linear forwards;
+        animation-delay: 0.5s;
+    }
 
-.content.hide {
-    animation: show-content-for-mobile 1.5s linear reverse forwards;
-    animation-delay: 0s;
-}
+    .menu.show {
+        animation: big-panel-for-mobile 1s linear forwards;
+        animation-delay: 0s;
+    }
+
+    .content.show {
+        animation: show-content-for-mobile 1s linear forwards;
+        animation-delay: 2s;
+    }
+
+    .content.hide {
+        animation: show-content-for-mobile 1.5s linear reverse forwards;
+        animation-delay: 0s;
+    }
 }
 
 @keyframes move-text {
@@ -482,6 +488,7 @@ canvas {
         margin: 0px;
         height: 0%;
     }
+
     100% {
         width: 30%;
         margin: 15px;
@@ -495,12 +502,13 @@ canvas {
         margin: 0px;
         height: 0%;
     }
+
     100% {
         width: 100%;
         margin: 15px;
         height: 0%;
     }
-    
+
 }
 
 @keyframes show-card-vertical {
@@ -508,6 +516,7 @@ canvas {
         opacity: 0;
         height: 0px;
     }
+
     100% {
         opacity: 0.7;
         height: 100%;
@@ -519,11 +528,12 @@ canvas {
         opacity: 0;
         height: 0px;
     }
+
     100% {
         opacity: 0.7;
         height: 30%;
     }
-    
+
 }
 
 @keyframes minimize-card {
@@ -576,6 +586,7 @@ canvas {
     0% {
         transform: translateY(-50%) scale(1) rotate(-90deg);
     }
+
     10% {
         transform: translateY(-100%) scale(1) rotate(-90deg);
     }
@@ -607,11 +618,12 @@ canvas {
     }
 }
 
-@keyframes show-content-for-mobile{
+@keyframes show-content-for-mobile {
     0% {
         height: 0%;
         border-width: 0px;
     }
+
     100% {
         height: 80%;
         border-width: 3px;
@@ -629,7 +641,7 @@ canvas {
 }
 
 @keyframes small-panel-for-mobile {
-    0%{
+    0% {
         height: 100%;
     }
 
@@ -656,7 +668,7 @@ canvas {
     100% {
         height: 100%;
     }
-    
+
 }
 
 @keyframes spring-pop {
