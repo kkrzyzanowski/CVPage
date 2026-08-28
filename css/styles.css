@@ -58,10 +58,13 @@ canvas {
         "wdth" 100;
 }
 
-.card:hover {
+.card:hover{
+    cursor: pointer;
+}
+
+.card:hover.maximize {
     cursor: pointer;
     transform: perspective(1000px) rotateY(0deg) scale(1.0);
-
 }
 
 .card.to-zero {
@@ -128,6 +131,8 @@ canvas {
 
 .card a.minimized {
     transform: translateY(-50%) rotate(-90deg) scale(0.2);
+    display: flex;
+    justify-content: center;
 }
 
 .card a.maximized {

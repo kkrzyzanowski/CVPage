@@ -21,21 +21,29 @@ export class Card {
 
     async StartActiveCardAnimation() {
 
-        await new Promise(resolve => {
-            const handler = async () => {
-                $(this.textElement).off('animationend', handler);
-                resolve();
-            }
-            this.card.classList.remove("default-perspective");
-                void this.card.offsetWidth;
-                this.card.classList.add("real-perspective");
-                this.card.classList.remove("maximize");
-                void this.card.offsetWidth;
-                this.card.classList.add("minimize");
-        });
+        this.textElement.getAnimations().forEach(animation => animation.cancel());
+
+        this.card.classList.remove("default-perspective");
+        void this.card.offsetWidth;
+        this.card.classList.add("real-perspective");
+        this.card.classList.remove("maximize");
+
+        const cardAnimation = waitForAnimation(this.card);
+        this.card.classList.add("minimize");
+        const animationStyle = getComputedStyle(this.card);
+        const animationDuration = parseFloat(animationStyle.animationDuration) * 1000;
+        const animationDelay = parseFloat(animationStyle.animationDelay) * 1000;
+        const animationTimeout = animationDuration + animationDelay + 100;
+        await Promise.race([
+            cardAnimation,
+            new Promise(resolve => setTimeout(resolve, animationTimeout))
+        ]);
+
+        this.waitForForMenuResize();
     }
 
     async StartActiveCardAnimationAfter() {
+        this.resolveMenuResize();
         this.card.classList.add("hoverCard");
         this.textElement.classList.remove("maximized");
         this.textElement.classList.remove("maximizeText");

@@ -25,11 +25,11 @@ export async function runAnimation($event) {
     });
     var activeCard = cards.find(x => x.isActive === true);;
     if (isContentRunned) {
+        await activeCard.StartActiveCardAnimation();
         hideCards.forEach(x => x.StartHideCardAnimation());
 
         await new Promise(resolve => setTimeout(resolve, 1500));
-        activeCard.StartActiveCardAnimation();
-        
+         
         await runContent();
         await activeCard.StartActiveCardAnimationAfter();
        
