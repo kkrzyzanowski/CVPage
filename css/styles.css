@@ -73,8 +73,8 @@ canvas {
 
 .card a {
     transform: translateY(-50%) scale(1.0) rotate(-90deg);
-    font-size: 20vh;
-    margin: 40px;
+    font-size: 18vh;
+    margin: 5.5vh;
     width: 100%;
     height: max-content;
     white-space: nowrap;
@@ -131,8 +131,6 @@ canvas {
 
 .card a.minimized {
     transform: translateY(-50%) rotate(-90deg) scale(0.2);
-    display: flex;
-    justify-content: center;
 }
 
 .card a.maximized {
@@ -263,17 +261,17 @@ canvas {
 
 .back-button.active {
     display: flex;
-    left: 0%;
+    left: 5%;
     opacity: 1;
     animation: spring-pop 1.2s ease-out forwards;
 }
 
 .back-button p:nth-child(1) {
-    font-size: 60px;
+    font-size: 6vh;
 }
 
 .back-button p:nth-child(2) {
-    font-size: 20px;
+    font-size: 2vh;
 }
 
 .welcome-panel {
@@ -288,13 +286,15 @@ canvas {
     align-items: center;
     z-index: 0;
     opacity: 1;
+    
 }
 
 .welcome-panel p {
+    padding: 2vh;
     justify-content: center;
     font-family: "Tektur", sans-serif;
     font-optical-sizing: auto;
-    font-size: 60px;
+    font-size: 8vh;
     color: white;
     animation: fade-anim 1s ease-in-out forwards;
     filter: url(#noise-aura);
@@ -364,7 +364,7 @@ canvas {
         justify-content: center;
         align-items: center;
         transform: scale(1.0);
-        font-size: 15vh;
+        font-size: 12vh;
         margin: 40px;
         width: 100%;
         white-space: nowrap;
@@ -373,25 +373,20 @@ canvas {
         transition: transform 1s ease;
     }
 
-    .card.hidden {
-        animation: hide-card-vertical 1s linear forwards,
-            hide-card-horizontal 1s linear 1s forwards;
-    }
-
     .card.show {
         animation: show-card-horizontal-for-mobile 1s linear forwards,
             show-card-vertical-for-mobile 1s linear 1s forwards;
     }
 
-    .card.minimize {
+    /* .card.minimize {
         animation: minimize-card-for-mobile 2s ease 1s forwards;
         animation-play-state: running;
-    }
+    } */
 
-    .card.maximize {
+    /* .card.maximize {
         animation: minimize-card-for-mobile 2s ease reverse forwards;
         animation-play-state: running;
-    }
+    } */
 
     .card a.minimized {
         transform: scale(0.5);
@@ -442,6 +437,13 @@ canvas {
         animation: show-content-for-mobile 1.5s linear reverse forwards;
         animation-delay: 0s;
     }
+
+    .back-button.active {
+    display: flex;
+    left: 2%;
+    opacity: 1;
+    animation: spring-pop-up 1.2s ease-out forwards;
+}
 }
 
 @keyframes move-text {
@@ -701,6 +703,33 @@ canvas {
 
     100% {
         transform: skewY(0deg) scale(1) translateX(0%);
+    }
+}
+@keyframes spring-pop-up {
+    0% {
+        transform: skewY(0deg) scale(1) translateY(-100%);
+        opacity: 0;
+    }
+
+    20% {
+        transform: skewY(0deg) scale(1) translateY(-20%);
+        opacity: 1;
+    }
+
+    40% {
+        transform: skewY(10deg) scale(0.97) translateY(5%);
+    }
+
+    75% {
+        transform: skewY(20deg) scale(1.02) translateY(15%);
+    }
+
+    90% {
+        transform: skewY(10deg) scale(0.97) translateY(5%);
+    }
+
+    100% {
+        transform: skewY(0deg) scale(1) translateY(0%);
     }
 }
 
