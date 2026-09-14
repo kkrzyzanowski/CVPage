@@ -74,7 +74,7 @@ canvas {
 .card a {
     transform: translateY(-50%) scale(1.0) rotate(-90deg);
     font-size: 18vh;
-    margin: 5.5vh;
+    margin: 40px;
     width: 100%;
     height: max-content;
     white-space: nowrap;
@@ -247,7 +247,7 @@ canvas {
 }
 
 .back-button {
-    padding: 15px;
+    padding: 20%;
     display: flex;
     position: absolute;
     flex-direction: column;
