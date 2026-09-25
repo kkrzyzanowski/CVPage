@@ -42,8 +42,8 @@ canvas {
     width: 30%;
     border-radius: 15px;
     align-items: flex-end;
-    justify-content: flex-start;
-    margin: 15px 15px 0px 15px;
+    justify-content: center;
+    margin: 40px 40px 0px 40px;
     position: relative;
     overflow: hidden;
     opacity: 0.7;
@@ -72,17 +72,32 @@ canvas {
 }
 
 .card a {
-    transform: translateY(-50%) scale(1.0) rotate(-90deg);
+    transform: scale(1.0);
     font-size: 18vh;
-    margin: 40px;
+    margin: calc(min(60px, 8vh));
     width: 100%;
+    writing-mode: sideways-lr;
     height: max-content;
     white-space: nowrap;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     transition: transform 1s ease;
+    align-self: flex-end;
+    position: absolute;
+    align-items: center;
+    display: flex;
 }
 
+.card .text-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .card.real-perspective {
     --rotateY: 0deg;
     --scale: 1;
@@ -125,19 +140,25 @@ canvas {
     animation: move-left 2s linear reverse forwards;
 }
 
-.card a.minimizeText {
+.card .text-wrapper a.minimizeText {
     animation: text-off 1s linear forwards;
 }
 
-.card a.minimized {
-    transform: translateY(-50%) rotate(-90deg) scale(0.2);
+.card .text-wrapper.minimized{
+    top: -35vh;
 }
 
-.card a.maximized {
-    transform: translateY(-50%) rotate(-90deg) scale(1.0);
+.card .text-wrapper.minimized a{
+    font-size: 6vh;
+    margin: 0;
 }
 
-.card a.maximizeText {
+.card .text-wrapper.maximized a{
+    margin: min(60px, 8vh);
+    transform: scale(1.0);
+}
+
+.card .text-wrapper a.maximizeText {
     animation: text-off 1s linear reverse forwards;
 }
 
@@ -187,8 +208,7 @@ canvas {
     border-color: rgb(89, 25, 148);
 }
 
-.card:hover:has(.maximized)>a {
-    position: relative;
+.card:hover .text-wrapper.maximized>a {
     animation: move-text 2s ease-out;
 }
 
@@ -344,7 +364,7 @@ canvas {
         border-radius: 15px;
         align-items: center;
         justify-content: flex-start;
-        margin: 15px;
+        margin: 40px 40px 0px 40px;
         position: relative;
         overflow: hidden;
         opacity: 0.7;
@@ -378,23 +398,13 @@ canvas {
             show-card-vertical-for-mobile 1s linear 1s forwards;
     }
 
-    /* .card.minimize {
-        animation: minimize-card-for-mobile 2s ease 1s forwards;
-        animation-play-state: running;
-    } */
-
-    /* .card.maximize {
-        animation: minimize-card-for-mobile 2s ease reverse forwards;
-        animation-play-state: running;
-    } */
-
     .card a.minimized {
         transform: scale(0.5);
         ;
     }
 
     .card a.maximized {
-        transform: scale(1.0) rotate(0deg);
+        transform: scale(1.0);
     }
 
     .card:hover:has(.maximized)>a {
@@ -591,15 +601,11 @@ canvas {
 
 @keyframes text-off {
     0% {
-        transform: translateY(-50%) scale(1) rotate(-90deg);
-    }
-
-    10% {
-        transform: translateY(-100%) scale(1) rotate(-90deg);
+        font-size: 18vh;
     }
 
     100% {
-        transform: translate(-50%, -100%) scale(0.2) rotate(-90deg);
+        font-size: 6vh;
     }
 }
 

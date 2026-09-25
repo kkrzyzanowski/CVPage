@@ -4,6 +4,7 @@ export class Card {
     isActive = false;
     isHidden = false;
     card = null;
+    textWrapper = null;
     textElement = null;
     previousStyleState = null;
     startCardPos = null;
@@ -21,7 +22,7 @@ export class Card {
 
     async StartActiveCardAnimation() {
 
-        this.textElement.getAnimations().forEach(animation => animation.cancel());
+        this.textWrapper.getAnimations().forEach(animation => animation.cancel());
 
         this.card.classList.remove("default-perspective");
         void this.card.offsetWidth;
@@ -45,7 +46,7 @@ export class Card {
     async StartActiveCardAnimationAfter() {
         this.resolveMenuResize();
         this.card.classList.add("hoverCard");
-        this.textElement.classList.remove("maximized");
+        this.textWrapper.classList.remove("maximized");
         this.textElement.classList.remove("maximizeText");
 
         this.textElement.classList.add("minimizeText");
@@ -57,7 +58,7 @@ export class Card {
                 resolve();
             };
             $(this.textElement).on('animationend', handler);
-            this.textElement.classList.add("minimized");
+            this.textWrapper.classList.add("minimized");
         });
     }
 
@@ -84,13 +85,13 @@ export class Card {
         await new Promise(resolve => setTimeout(resolve, 2001));
         this.textElement.classList.remove("minimizeText");
         void this.textElement.offsetWidth;
-        this.textElement.classList.remove("minimized");
+        this.textWrapper.classList.remove("minimized");
 
         const maximizeTextAnimation = waitForAnimation(this.textElement, 'animationend');
         this.textElement.classList.add("maximizeText");
         await maximizeTextAnimation;
         await new Promise(resolve => setTimeout(resolve, 1000));
-        this.textElement.classList.add("maximized");
+        this.textWrapper.classList.add("maximized");
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
         this.card.classList.remove("minimize");
@@ -195,7 +196,8 @@ export class Card {
 
     constructor(id) {
         this.card = document.getElementById(id);
-        this.textElement = this.card.firstElementChild;
+        this.textWrapper = this.card.firstElementChild;
+        this.textElement = this.textWrapper.firstElementChild;
         this.startCardPos = this.card.getBoundingClientRect();
         this.currentCardPos = this.startCardPos;
         this.initializeCardVariables(id);
