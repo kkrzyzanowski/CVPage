@@ -22,13 +22,13 @@ export class Card {
 
     async StartActiveCardAnimation() {
 
-        this.textWrapper.getAnimations().forEach(animation => animation.cancel());
+        this.textElement.getAnimations().forEach(animation => animation.cancel());
 
         this.card.classList.remove("default-perspective");
         void this.card.offsetWidth;
         this.card.classList.add("real-perspective");
-        this.card.classList.remove("maximize");
 
+        this.card.classList.remove("maximize");
         const cardAnimation = waitForAnimation(this.card);
         this.card.classList.add("minimize");
         const animationStyle = getComputedStyle(this.card);
@@ -74,21 +74,22 @@ export class Card {
         this.card.classList.add("back");
     }
 
-    async BackActiveCardToDefault() {
-
+    async BackTextToDefault(){
         let backButton = this.card.querySelector(".back-button");
         backButton.classList.remove("active");
 
         this.card.classList.remove("real-perspective");
         void this.card.offsetWidth;
-        this.card.classList.add("real-perspective");
+        this.card.classList.add("default-perspective");
 
-        await new Promise(resolve => setTimeout(resolve, 2001));
         this.textElement.classList.remove("minimizeText");
         void this.textElement.offsetWidth;
         const maximizeTextAnimation = waitForAnimation(this.textElement, 'animationend');
         this.textElement.classList.add("maximizeText");
         await maximizeTextAnimation;
+    }
+    
+    async BackActiveCardToDefault() {
         await new Promise(resolve => setTimeout(resolve, 1000));
         this.textWrapper.classList.remove("minimized");
         void this.textWrapper.offsetWidth;
@@ -96,10 +97,11 @@ export class Card {
 
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
+        
         this.card.classList.remove("minimize");
-
         void this.card.offsetWidth;
         this.card.classList.add("maximize");
+        
         this.isActive = false;
     }
 

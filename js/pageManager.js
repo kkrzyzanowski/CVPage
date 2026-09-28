@@ -38,7 +38,12 @@ export async function runAnimation($event) {
     }
     else {
         await hideContentBox();
-        await activeCard.BackActiveCardToDefault();
+await Promise.all([
+    ShowMenu(),
+    activeCard.BackTextToDefault()
+]);
+
+await activeCard.BackActiveCardToDefault();
         await Promise.all(hideCards.map(x => x.BackHiddenCardToDefault()));
     }
     isAnimationInProgress = false;
@@ -77,11 +82,12 @@ async function hideContentBox() {
 
         }, 1600);
     });
+}
 
+function ShowMenu(){
     menu.classList.remove("hide");
     menu.classList.add("show");
 }
-
 async function hideContentValue(card) {
     const contentContainer = content.querySelector(".content-container");
     const contentItems = content.querySelectorAll(".item");

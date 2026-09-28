@@ -271,7 +271,7 @@ canvas {
 }
 
 .back-button {
-    padding: 20%;
+    padding: 1rem;
     display: flex;
     position: absolute;
     flex-direction: column;
@@ -606,10 +606,12 @@ canvas {
 @keyframes text-off {
     0% {
         font-size: 18vh;
+        margin: min(60px, 8vh);
     }
 
     100% {
         font-size: 6vh;
+        margin: 0;
     }
 }
 
