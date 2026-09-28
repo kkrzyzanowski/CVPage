@@ -145,7 +145,7 @@ canvas {
 }
 
 .card .text-wrapper.minimized{
-    top: -35vh;
+    animation: translate-top 0.9s linear forwards;
 }
 
 .card .text-wrapper.minimized a{
@@ -156,6 +156,10 @@ canvas {
 .card .text-wrapper.maximized a{
     margin: min(60px, 8vh);
     transform: scale(1.0);
+}
+
+.card .text-wrapper.maximized{
+  animation: translate-top 0.9s linear reverse forwards;
 }
 
 .card .text-wrapper a.maximizeText {
@@ -778,5 +782,15 @@ canvas {
 
     100% {
         transform: perspective(1000px) rotateY(0deg) scale(1.0);
+    }
+}
+
+@keyframes translate-top{
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-35vh);
     }
 }

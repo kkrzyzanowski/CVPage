@@ -47,8 +47,10 @@ export class Card {
         this.resolveMenuResize();
         this.card.classList.add("hoverCard");
         this.textWrapper.classList.remove("maximized");
-        this.textElement.classList.remove("maximizeText");
+        void this.textWrapper.offsetWidth;
+        this.textWrapper.classList.add("minimized");
 
+        this.textElement.classList.remove("maximizeText");
         this.textElement.classList.add("minimizeText");
         await new Promise(resolve => {
             const handler = async () => {
@@ -58,7 +60,6 @@ export class Card {
                 resolve();
             };
             $(this.textElement).on('animationend', handler);
-            this.textWrapper.classList.add("minimized");
         });
     }
 
@@ -85,13 +86,14 @@ export class Card {
         await new Promise(resolve => setTimeout(resolve, 2001));
         this.textElement.classList.remove("minimizeText");
         void this.textElement.offsetWidth;
-        this.textWrapper.classList.remove("minimized");
-
         const maximizeTextAnimation = waitForAnimation(this.textElement, 'animationend');
         this.textElement.classList.add("maximizeText");
         await maximizeTextAnimation;
         await new Promise(resolve => setTimeout(resolve, 1000));
+        this.textWrapper.classList.remove("minimized");
+        void this.textWrapper.offsetWidth;
         this.textWrapper.classList.add("maximized");
+
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
         this.card.classList.remove("minimize");
