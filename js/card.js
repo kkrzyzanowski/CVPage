@@ -22,7 +22,12 @@ export class Card {
 
     async StartActiveCardAnimation() {
 
-        this.textElement.getAnimations().forEach(animation => animation.cancel());
+const textAnimations = this.textElement
+    .getAnimations()
+    .filter(animation => animation.animationName === "text-off");
+
+        textAnimations.forEach(animation => animation.reverse());
+        await Promise.allSettled(textAnimations.map(animation => animation.finished));
 
         this.card.classList.remove("default-perspective");
         void this.card.offsetWidth;
@@ -86,15 +91,20 @@ export class Card {
         void this.textElement.offsetWidth;
         const maximizeTextAnimation = waitForAnimation(this.textElement, 'animationend');
         this.textElement.classList.add("maximizeText");
-        await maximizeTextAnimation;
+        await Promise.all([
+            this.MaximizeCard(),
+            await maximizeTextAnimation
+        ]);
     }
     
-    async BackActiveCardToDefault() {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    MaximizeCard(){
+        new Promise(resolve => setTimeout(resolve, 1000));
         this.textWrapper.classList.remove("minimized");
         void this.textWrapper.offsetWidth;
         this.textWrapper.classList.add("maximized");
+    }
 
+    async BackActiveCardToDefault() {
         this.card.classList.remove("hoverCard");
         this.textElement.classList.remove("maximizeText");
         
