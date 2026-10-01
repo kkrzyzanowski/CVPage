@@ -271,7 +271,7 @@ canvas {
 }
 
 .back-button {
-    padding: 1rem;
+    padding: 15px;
     display: flex;
     position: absolute;
     flex-direction: column;
@@ -387,9 +387,10 @@ canvas {
         display: flex;
         justify-content: center;
         align-items: center;
+        writing-mode: horizontal-tb;
         transform: scale(1.0);
         font-size: 12vh;
-        margin: 40px;
+        margin: 0;
         width: 100%;
         white-space: nowrap;
         animation-duration: 1s;
@@ -397,23 +398,33 @@ canvas {
         transition: transform 1s ease;
     }
 
+    .card .text-wrapper.maximized a{
+        margin: 40px;
+    }
     .card.show {
         animation: show-card-horizontal-for-mobile 1s linear forwards,
             show-card-vertical-for-mobile 1s linear 1s forwards;
     }
 
-    .card a.minimized {
+    .card .text-wrapper.minimized {
         transform: scale(0.5);
-        ;
     }
 
-    .card a.maximized {
+    .card .text-wrapper.maximized {
         transform: scale(1.0);
     }
 
-    .card:hover:has(.maximized)>a {
+    .card:hover .text-wrapper.maximized>a {
         position: relative;
         animation: move-text-for-mobile 2s ease-out;
+    }
+
+    .card .text-wrapper.minimized{
+        animation: translate-top-for-mobile 0.9s linear forwards;
+    }
+
+    .card .text-wrapper.maximized{
+        animation: translate-top-for-mobile 0.9s linear reverse forwards;
     }
 
     .card.activate {
@@ -454,7 +465,7 @@ canvas {
 
     .back-button.active {
     display: flex;
-    left: 2%;
+    left: 1%;
     opacity: 1;
     animation: spring-pop-up 1.2s ease-out forwards;
 }
@@ -795,4 +806,15 @@ canvas {
     100% {
         transform: translateY(-35vh);
     }
+}
+
+@keyframes translate-top-for-mobile {
+     0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-2vh);
+    }
+    
 }
