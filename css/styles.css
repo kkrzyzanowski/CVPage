@@ -435,11 +435,11 @@ canvas {
         animation: move-up 2s linear reverse forwards;
     }
 
-    .card a.minimizeText {
+    .card .text-wrapper a.minimizeText {
         animation: text-off-for-mobile 1s linear forwards;
     }
 
-    .card a.maximizeText {
+    .card .text-wrapper a.maximizeText {
         animation: text-off-for-mobile 1s linear reverse forwards;
     }
 
@@ -628,11 +628,13 @@ canvas {
 
 @keyframes text-off-for-mobile {
     0% {
-        transform: translateX(0) scale(1) rotate(0deg);
+        font-size: 12vh;
+        margin: 40px;
     }
 
     100% {
-        transform: translateX(0%) scale(0.5);
+        font-size: 6vh;
+        margin: 0;
     }
 }
 
