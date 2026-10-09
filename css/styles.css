@@ -339,7 +339,7 @@ canvas {
     .list {
         display: flex;
         list-style: none;
-        height: 100%;
+        height: 70%;
         justify-content: flex-start;
         flex-direction: column;
         width: 100%;
@@ -355,7 +355,7 @@ canvas {
         border-color: #8a2be2;
         height: 0%;
         margin-top: 15px;
-        translate: 0 150px;
+        translate: 0 10vh;
         display: flex;
         position: absolute;
     }
@@ -387,9 +387,10 @@ canvas {
         display: flex;
         justify-content: center;
         align-items: center;
+        align-self: center;
         writing-mode: horizontal-tb;
         transform: scale(1.0);
-        font-size: 12vh;
+        font-size: 7vh;
         margin: 0;
         width: 100%;
         white-space: nowrap;
@@ -464,10 +465,23 @@ canvas {
     }
 
     .back-button.active {
-    display: flex;
-    left: 1%;
-    opacity: 1;
-    animation: spring-pop-up 1.2s ease-out forwards;
+        display: flex;
+        left: 1vh;
+        opacity: 1;
+        animation: spring-pop-up 1.2s ease-out forwards;
+        align-self: center;
+        height: 9vh;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+}
+.back-button p:nth-child(1) {
+    font-size: 4vh;
+    height: 70%;
+}
+
+.back-button p:nth-child(2) {
+    font-size: 1.6vh;
 }
 }
 
@@ -628,12 +642,12 @@ canvas {
 
 @keyframes text-off-for-mobile {
     0% {
-        font-size: 12vh;
+        font-size: 7vh;
         margin: 40px;
     }
 
     100% {
-        font-size: 6vh;
+        font-size: 4vh;
         margin: 0;
     }
 }
@@ -816,7 +830,7 @@ canvas {
     }
 
     100% {
-        transform: translateY(-2vh);
+        transform: translateY(0vh);
     }
     
 }
