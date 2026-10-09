@@ -339,12 +339,11 @@ canvas {
     .list {
         display: flex;
         list-style: none;
-        height: 70%;
+        height: 100%;
         justify-content: flex-start;
         flex-direction: column;
         width: 100%;
         position: absolute;
-        padding-right: 15px;
     }
 
     .content {
@@ -355,7 +354,7 @@ canvas {
         border-color: #8a2be2;
         height: 0%;
         margin-top: 15px;
-        translate: 0 10vh;
+        translate: 0 15vh;
         display: flex;
         position: absolute;
     }

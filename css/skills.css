@@ -1,4 +1,4 @@
-.skills{
+.skills {
     display: flex;
     justify-content: flex-start;
     width: 100%;
@@ -7,7 +7,7 @@
     margin: 0 auto;
 }
 
-.skills h2{
+.skills h2 {
     display: inline-flex;
     position: relative;
     width: 100%;
@@ -17,7 +17,7 @@
     opacity: 0.8;
 }
 
-.skills h2::after{
+.skills h2::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -29,15 +29,17 @@
 }
 
 
-.skills h2 .header-text{
+.skills h2 .header-text {
     opacity: 0;
     animation: header-text-up 0.45s ease-in-out 0.0s forwards;
 }
-.skills h2 span{
+
+.skills h2 span {
     height: max-content;
-    font-size: 30px;
+    font-size: 4vh;
 }
-.skills-container{
+
+.skills-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,11 +54,11 @@
     animation: show-skills 1.5s ease-in-out 0.5s forwards;
 }
 
-.skill-tab{
+.skill-tab {
     display: flex;
-    position: absolute; 
+    position: absolute;
     justify-content: center;
-    flex-direction: column;     
+    flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -66,20 +68,20 @@
     z-index: 1;
 }
 
-.skills-chart{
+.skills-chart {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.button-skills{
+.button-skills {
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
     align-items: center;
     width: 10%;
-    height:25%;
+    height: 25%;
     text-align: center;
     background-color: rgba(0.5, 0.5, 0.5, 0);
     color: blueviolet;
@@ -89,12 +91,12 @@
     z-index: 2;
 }
 
-.button-skills:hover{
+.button-skills:hover {
     color: white;
     cursor: pointer;
 }
 
-.button-skills::after{
+.button-skills::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -109,86 +111,123 @@
     z-index: -1;
 }
 
-.button-skills:hover::after{
+.button-skills:hover::after {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.button-skills[data-direction="left"]{
+.button-skills[data-direction="left"] {
     left: 10px;
 }
-.button-skills[data-direction="right"]{
+
+.button-skills[data-direction="right"] {
     right: 10px;
 }
 
-.button-skills.item.hide{
+.button-skills.item.hide {
     animation: hide-button 0.5s ease-in-out 0s forwards;
 }
 
-.skill-inactive{
+.skill-inactive {
     transform: translateX(100%);
     pointer-events: none;
 }
 
-.skill-active{
+.skill-active {
     transform: translateX(0);
     pointer-events: auto;
 }
 
-.skills-container.hide{
+.skills-container.hide {
     mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
     animation: hide-skills 1.5s ease-in-out 0s forwards;
 }
 
-@keyframes show-skills{
-    0%{
+@keyframes show-skills {
+    0% {
         opacity: 0;
     }
-    70%{
+
+    70% {
         opacity: 1;
         translate: 0 -10%;
     }
-    100%{
+
+    100% {
         opacity: 1;
         translate: 0 0;
     }
 }
 
-@keyframes hide-skills{
-    0%{
+@keyframes hide-skills {
+    0% {
         opacity: 1;
         translate: 0 0;
     }
-    100%{
+
+    100% {
         opacity: 0;
         translate: 0 100%;
     }
 }
 
-@keyframes hide-button{
-    0%{
+@keyframes hide-button {
+    0% {
         opacity: 1;
     }
-    70%{
+
+    70% {
         opacity: 1;
         translate: 0 -10%;
     }
-     90%{
+
+    90% {
         opacity: 0;
         translate: 0 -10%;
     }
-     100%{
+
+    100% {
         opacity: 0;
         translate: 0 100%;
     }
 }
 
-.header.onclose p{
+.header.onclose p {
     animation: header-text-down 0.5s ease-in-out 0.0s forwards;
 }
-.skills h2 .header-text{
+
+.skills h2 .header-text {
     opacity: 0;
     animation: header-text-up 0.45s ease-in-out 0.0s forwards;
     display: inline-flex;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+
+    .button-skills {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        transform: translateY(85%);
+        top: 50%;
+        align-items: center;
+        align-self: center;
+        width: 100%;
+        height: 25%;
+        text-align: center;
+        border: none;
+        font-size: 40;
+        z-index: 2;
+    }
+
+    .button-skills[data-direction="left"] {
+        right: 10vh;
+        left: auto;
+    }
+
+    .button-skills[data-direction="right"] {
+        right: -10vh;
+        left: auto;
+    }
 }
