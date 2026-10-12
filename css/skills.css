@@ -213,7 +213,7 @@
         top: 50%;
         align-items: center;
         align-self: center;
-        width: 100%;
+        width: 25%;
         height: 25%;
         text-align: center;
         border: none;
@@ -222,12 +222,10 @@
     }
 
     .button-skills[data-direction="left"] {
-        right: 10vh;
-        left: auto;
+        right: 0vh;
     }
 
     .button-skills[data-direction="right"] {
-        right: -10vh;
-        left: auto;
+        right: 0vh;
     }
 }
