@@ -93,6 +93,7 @@
 
 .about-me .socials{
     display: flex;
+    margin-top: 10px;
     justify-content: right;
     --imgdelay: 0.0s;
 }
@@ -210,8 +211,25 @@
 }
 
 @media (max-width: 768px) {
+    .about-me {
+        height: 100%;
+        min-height: 0;
+    }
+
+    .about-me .content-container {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        scrollbar-width: none;
+    }
+
     .about-me .content-container > p:nth-child(even),
     .about-me .content-container > p:nth-child(odd){
         font-size: 2.0vh;
     }
-}   
+}

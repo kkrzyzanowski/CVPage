@@ -332,6 +332,10 @@ canvas {
 
 @media (max-width: 768px) {
 
+    body{
+        scrollbar-width: thin;
+        scrollbar-color: blueviolet transparent;
+    }
     .menu {
         width: 95%;
         position: relative;
