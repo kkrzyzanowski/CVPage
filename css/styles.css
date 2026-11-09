@@ -286,7 +286,7 @@ canvas {
 
 .back-button.active {
     display: flex;
-    left: 1vh;
+    left: 0.5rem;
     opacity: 1;
     animation: spring-pop 1.2s ease-out forwards;
 }

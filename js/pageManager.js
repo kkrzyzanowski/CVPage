@@ -7,11 +7,20 @@ let cards = [];
 let elementsCount = 0;
 let menu = null;
 let content = null;
+const pageRoutes = ["about-me", "skills", "projects"];
+
+function updatePageRoute(index) {
+    const route = index === null ? "" : pageRoutes[Number(index)];
+    const url = new URL(window.location.href);
+    url.hash = route ? `#${route}` : "";
+    window.history.replaceState(window.history.state, "", url);
+}
 
 export async function runAnimation($event) {
     if (isAnimationInProgress) return;
     isAnimationInProgress = true;
     isContentRunned = !isContentRunned;
+    updatePageRoute(isContentRunned ? $event : null);
     for (var i = 0; i < elementsCount; i++) {
         var card = cards.find(x => x.card.id == i);
         if (card) {
@@ -156,6 +165,15 @@ export function InitializeClick() {
     }
     content = document.getElementById("content");
     menu = document.getElementById("menu");
+
+    const initialPage = pageRoutes.indexOf(window.location.hash.slice(1));
+    if (initialPage !== -1) {
+        window.setTimeout(() => {
+            if (!isContentRunned && !isAnimationInProgress) {
+                runAnimation(String(initialPage));
+            }
+        }, 2000);
+    }
 }
 
 
