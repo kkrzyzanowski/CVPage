@@ -286,17 +286,20 @@ canvas {
 
 .back-button.active {
     display: flex;
-    left: 0.5rem;
+    left: -0.5rem;
     opacity: 1;
     animation: spring-pop 1.2s ease-out forwards;
 }
 
 .back-button p:nth-child(1) {
-    font-size: 6vh;
+    font-size: 4.5rem;
 }
 
 .back-button p:nth-child(2) {
-    font-size: 2vh;
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .welcome-panel {
