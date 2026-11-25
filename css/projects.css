@@ -167,12 +167,18 @@
 }
 
 .title{
+    font-family: "Tektur", sans-serif;
     font-size: larger;
     height: auto;
     margin-top: 10px;
 }
 
 .description{
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: blueviolet transparent;
     display: flex;
     justify-content: center;
     flex-grow: 1;
@@ -180,7 +186,10 @@
     margin: 10px;
     text-align: left;
     height: 100%;
+}
 
+.description.description-overflow{
+    align-items: flex-start;
 }
 
 .modal{

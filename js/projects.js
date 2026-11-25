@@ -1,6 +1,21 @@
 let currentInput = 2;
 let inputs = 4
+
+function updateDescriptionAlignment() {
+    document.querySelectorAll(".description").forEach(description => {
+        description.classList.toggle(
+            "description-overflow",
+            description.scrollHeight > description.clientHeight
+        );
+    });
+}
+
+window.addEventListener("resize", updateDescriptionAlignment);
+document.fonts.ready.then(updateDescriptionAlignment);
+
 export function loadVideoProjectsBehaviour() {
+    updateDescriptionAlignment();
+
     const modal = document.getElementById("videoModal");
     const videoPlayer = document.getElementById("videoPlayer");
     const videoSource = document.getElementById("videoSource");
@@ -9,10 +24,19 @@ export function loadVideoProjectsBehaviour() {
     document.querySelectorAll(".project-tab img").forEach(img => {
         img.addEventListener("click", function () {
             const videoSrc = this.getAttribute("data-video");
-            const extension = videoSrc.split('.').pop().toLowerCase();
-            let type = "video/mp4";
+            if (!videoSrc) {
+                return;
+            }
+
+            const tab = this.closest(".project-tab");
+            const tabs = [...document.querySelectorAll(".project-tab")];
+            const tabIndex = tabs.indexOf(tab) + 1;
+            if (tabIndex !== currentInput) {
+                return;
+            }
+
             videoSource.src = videoSrc;
-            videoSource.type = type;
+            videoSource.type = "video/mp4";
             videoPlayer.load();
             videoPlayer.play();
             modal.style.display = "flex";
@@ -43,6 +67,13 @@ function loadEventsForProjects(){
 
     document.querySelectorAll("input[name='project-nav']").forEach(button =>{
         button.addEventListener("click",() => InputClick())
+    });
+
+    document.querySelectorAll(".project-tab").forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+            currentInput = index + 1;
+            document.getElementById(`pos${currentInput}`).checked = true;
+        });
     });
 }
 

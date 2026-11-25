@@ -18,6 +18,12 @@
     width: 100%;
 }
 
+.about-me p{
+    font-family: "Tektur", sans-serif;
+    font-optical-sizing: auto;
+    opacity: 0.8;
+}
+
 .about-me h2::after{
     content: '';
     position: absolute;
